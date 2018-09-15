@@ -7,13 +7,15 @@ import com.jfoenix.controls.JFXHamburger
 import javafx.scene.layout.Region
 import com.jfoenix.controls.JFXButton
 
-dynamic component ControlBarView controlledby ControlBarController  styledwith "/css/SoFifa.css"{
+dynamic component ControlBarView controlledby ControlBarController styledwith "/css/SoFifa.css" {
 	ControlBarView id rootNode {
-		styleClass : ["control-bar"],
+		styleClass : [
+			"control-bar" 
+		],
 		alignment : "CENTER_LEFT",
-		spacing : 15, 
+		spacing : 15,
 		JFXHamburger id jfxHamburger {
-  
+
 		},
 		Region {
 			static hgrow : "ALWAYS"

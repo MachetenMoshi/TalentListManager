@@ -4,4 +4,5 @@
 
 control-bar {
 	-fx-background-color: -fx-base;
+	-fx-max-height: 40.0;
 }

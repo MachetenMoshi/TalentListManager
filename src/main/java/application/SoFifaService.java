@@ -18,8 +18,6 @@ import org.jsoup.nodes.Document;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import objects.Player;
 
 public class SoFifaService {
