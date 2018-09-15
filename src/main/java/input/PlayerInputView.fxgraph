@@ -1,0 +1,18 @@
+package input
+
+import javafx.scene.layout.BorderPane
+import com.jfoenix.controls.JFXTextField
+import javafx.scene.layout.VBox
+import input.PlayerInputViewController
+import input.PlayerInputView
+import javafx.scene.control.TextField
+
+dynamic component PlayerInputView controlledby PlayerInputViewController {
+	PlayerInputView id rootNode {
+		JFXTextField id tfId {
+			promptText : "ID",
+			labelFloat : true,
+			onKeyPressed : controllermethod onKeyPressed
+		}
+	}
+}

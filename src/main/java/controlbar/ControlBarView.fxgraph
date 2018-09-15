@@ -1,0 +1,33 @@
+package controlbar
+
+import javafx.scene.layout.HBox
+import controlbar.ControlBarController
+import controlbar.ControlBarView
+import com.jfoenix.controls.JFXHamburger
+import javafx.scene.layout.Region
+import com.jfoenix.controls.JFXButton
+
+dynamic component ControlBarView controlledby ControlBarController {
+	ControlBarView id rootNode {
+		alignment : "CENTER_LEFT",
+		spacing : 15, 
+		JFXHamburger id jfxHamburger {
+  
+		},
+		Region {
+			static hgrow : "ALWAYS"
+		},
+		JFXButton id btnRefresh {
+			text : "Refresh",
+			onAction : controllermethod onRefresh
+		},
+		JFXButton id btnAdd {
+			text : "Add",
+			onAction : controllermethod onAdd
+		},
+		JFXButton id btnOptions {
+			text : "Options",
+			onAction : controllermethod onOptions
+		}
+	}
+}

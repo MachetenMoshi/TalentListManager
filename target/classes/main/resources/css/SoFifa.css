@@ -1,0 +1,7 @@
+* {
+   -fx-base: #00b8ea;
+}
+
+control-bar {
+	-fx-background-color: -fx-base;
+}
