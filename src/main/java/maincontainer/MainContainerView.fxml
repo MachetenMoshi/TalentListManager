@@ -4,8 +4,10 @@
 -->
 
 <?import java.lang.*?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import maincontainer.MainContainerView?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="MainContainerView" fx:id="rootNode" fx:controller="maincontainer.MainContainerController">
 
+	<JFXDrawer fx:id="jfxDrawer"/> 
 </fx:root>

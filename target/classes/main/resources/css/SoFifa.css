@@ -1,8 +1,38 @@
 * {
-   -fx-base: #00b8ea;
+     -fx-base: #c8c5ce;
+     -fx-text-color: #333235;
+     -fx-highlight-color: #00b8ea;
 }
 
-control-bar {
+.control-bar {
+	-fx-background-color: -fx-highlight-color;
+	-fx-max-height: 45.0;
+}
+.jfx-text-field {
+	-jfx-focus-color: -fx-highlight-color;
+	-jfx-unfocus-color: -fx-text-color;
+}
+.jfx-text-area {
+	-jfx-focus-color: -fx-highlight-color;
+		-jfx-unfocus-color: -fx-text-color;
+}
+
+.jfx-text-area .content{
+	-fx-background-color: WHITE;
+	-fx-text-fill: -fx-text-color;
+}
+
+.header-view {
 	-fx-background-color: -fx-base;
-	-fx-max-height: 40.0;
+	-fx-min-height:35.0;
+    -fx-border-style: solid;
+    -fx-border-width: 0.0 0.0 3.0 0.0;
+    -fx-border-color: darkgrey;	
+}
+
+
+.solid-separator *.line { 
+-fx-border-style: solid;
+-fx-border-width: 4.0px;
+
 }

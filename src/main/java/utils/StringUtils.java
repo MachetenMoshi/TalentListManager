@@ -1,4 +1,4 @@
-package application;
+package utils;
 
 public class StringUtils {
 	public static boolean isInteger(String s) {

@@ -23,122 +23,40 @@ dynamic component PlayerDisplayView controlledby PlayerDisplayController {
 			TableColumn id tcPotential {
 				text : "Potential"
 			},
+			TableColumn id tcPace {
+				text : "Schnelligkeit"
+			},
+
+			TableColumn id tcShooting {
+				text : "Schuss"
+			},
+			TableColumn id tcDribbling {
+				text : "Dribbling"
+			},
+			TableColumn id tcPassing {
+				text : "Passen"
+			},
+			TableColumn id tcDefending {
+				text : "Defensive"
+			},
+			TableColumn id tcPhysical {
+				text : "Körperlich"
+			},
+
 			TableColumn id tcSkillMoves {
 				text : "Spezialbewegungen"
 			},
 			TableColumn id tcWeakFoot {
 				text : "Schwacher Fuß"
 			},
-			TableColumn id tcCrossing {
-				text : "Flanken"
-			},
-			TableColumn id tcFinishing {
-				text : "Abschluss"
-			},
-			TableColumn id tcHeadingAccuracy {
-				text : "Kopfballgenauigkeit"
-			},
-			TableColumn id tcShortPassing {
-				text : "Kurzpass"
-			},
-			TableColumn id tcVolleys {
-				text : "Volley"
-			},
-			TableColumn id tcDribbling {
-				text : "Dribbling"
-			},
-			TableColumn id tcCurve {
-				text : "Effet"
-			},
-			TableColumn id tcFKAccuracy {
-				text : "Freistoß"
-			},
-			TableColumn id tcLongPassing {
-				text : "Langer Pass"
-			},
-			TableColumn id tcBallControl {
-				text : "Ballkontrolle"
-			},
-			TableColumn id tcAcceleration {
-				text : "Beschleunigung"
-			},
-			TableColumn id tcSprintSpeed {
-				text : "Sprintgeschwindigkeit"
-			},
-			TableColumn id tcAgility {
-				text : "Beweglichkeit"
-			},
-			TableColumn id tcReactions {
-				text : "Reaktion"
-			},
-			TableColumn id tcBalance {
-				text : "Balance"
-			},
-			TableColumn id tcShotPower {
-				text : "Schusskraft"
-			},
-			TableColumn id tcJumping {
-				text : "Sprungkraft"
-			},
-			TableColumn id tcStamina {
-				text : "Ausdauer"
-			},
-			TableColumn id tcStrength {
-				text : "Stärke"
-			},
-			TableColumn id tcLongShots {
-				text : "Distanzschuss"
-			},
-			TableColumn id tcAggression {
-				text : "Agression"
-			},
-			TableColumn id tcInterceptions {
-				text : "Abfangen"
-			},
-			TableColumn id tcPositioning {
-				text : "Stellungspspiel"
-			},
-			TableColumn id tcVision {
-				text : "Übersicht"
-			},
-			TableColumn id tcPenalties {
-				text : "Elfmeter"
-			},
-			TableColumn id tcComposure {
-				text : "Composure"
-			},
-			TableColumn id tcMarking {
-				text : "Manndeckung"
-			},
-			TableColumn id tcStandingTackle {
-				text : "Fairer Zweikampf"
-			},
-			TableColumn id tcSlidingTackle {
-				text : "Grätschen"
-			},
-			TableColumn id tcGKDiving {
-				text : "GK Diving"
-			},
-			TableColumn id tcGKHandling {
-				text : "GK Handling"
-			},
-			TableColumn id tcGKKicking {
-				text : "GK Kicking"
-			},
-			TableColumn id tcGKPositioning {
-				text : "GK Positioning"
-			},
-			TableColumn id tcGKReflexes {
-				text : "GK Reflexes"
-			},
 			TableColumn id tcWorkRate {
 				text : "Arbeitsraten"
 			},
 			TableColumn id tcJoined {
-				text : "Vertragssart"
+				text : "Vertragsstart"
 			},
 			TableColumn id tcLoanedFrom {
-				text : "Ausgeliehen?" 
+				text : "Ausgeliehen?"
 			}
 		]
 	}

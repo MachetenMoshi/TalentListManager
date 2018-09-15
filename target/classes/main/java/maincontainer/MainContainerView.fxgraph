@@ -3,10 +3,11 @@ package maincontainer
 import javafx.scene.layout.AnchorPane
 import maincontainer.MainContainerController
 import maincontainer.MainContainerView
+import javafx.scene.layout.BorderPane
+import com.jfoenix.controls.JFXDrawer
 
 dynamic component MainContainerView controlledby MainContainerController {
 	MainContainerView id rootNode {
-	//TODO Add Nodes 
- 
+		JFXDrawer id jfxDrawer
 	}
 }

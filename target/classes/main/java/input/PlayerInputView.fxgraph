@@ -6,13 +6,30 @@ import javafx.scene.layout.VBox
 import input.PlayerInputViewController
 import input.PlayerInputView
 import javafx.scene.control.TextField
+import com.jfoenix.controls.JFXTextArea
+import com.jfoenix.controls.JFXButton
+import javafx.geometry.Insets
 
 dynamic component PlayerInputView controlledby PlayerInputViewController {
 	PlayerInputView id rootNode {
+		spacing : 20,
+		padding : Insets {
+			top : 15,
+			left : 5,
+			right : 5,
+			bottom : 10
+		},
 		JFXTextField id tfId {
 			promptText : "ID",
-			labelFloat : true,
-			onKeyPressed : controllermethod onKeyPressed
+			labelFloat : true
+		},
+		JFXTextArea id taComment {
+			promptText : "Comment",
+			labelFloat : true
+		},
+		JFXButton id btnAdd {
+			text : "Add",
+			onAction : controllermethod onAdd
 		}
 	}
 }

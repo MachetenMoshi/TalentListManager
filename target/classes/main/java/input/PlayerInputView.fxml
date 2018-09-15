@@ -4,10 +4,18 @@
 -->
 
 <?import java.lang.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import input.PlayerInputView?>
+<?import javafx.geometry.Insets?>
 
-<fx:root xmlns:fx="http://javafx.com/fxml" type="PlayerInputView" fx:id="rootNode" fx:controller="input.PlayerInputViewController">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="PlayerInputView" fx:id="rootNode" fx:controller="input.PlayerInputViewController" spacing="20">
 
-	<JFXTextField fx:id="tfId" promptText="ID" labelFloat="true" onKeyPressed="#onKeyPressed"/> 
+	<JFXTextField fx:id="tfId" promptText="ID" labelFloat="true"/> 
+	<JFXTextArea fx:id="taComment" promptText="Comment" labelFloat="true"/> 
+	<JFXButton fx:id="btnAdd" text="Add" onAction="#onAdd"/> 
+	<padding>
+		<Insets top="15" left="5" right="5" bottom="10"/> 
+	</padding>
 </fx:root>

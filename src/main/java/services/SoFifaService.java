@@ -1,4 +1,4 @@
-package application;
+package services;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -18,7 +18,12 @@ import org.jsoup.nodes.Document;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
+import objects.Attributes;
+import objects.CombinedAttribtues;
+import objects.DetailAttributes;
+import objects.Information;
 import objects.Player;
+import utils.SoFifaParser;
 
 public class SoFifaService {
 	private static final String baseUrl = "https://sofifa.com/player/";
@@ -27,15 +32,18 @@ public class SoFifaService {
 		Document doc = loadPlayerPage(baseUrl.concat(id));
 		Map<String, String> map = new HashMap<>();
 
-		for (String label : Player.getLabels())
+		for (String label : Attributes.labels)
 			SoFifaParser.setEntry(doc, label, map);
 		map = SoFifaParser.setMetaData(doc, map);
+		map = SoFifaParser.setCombinedAttributes(doc, map, id);
 		map = convertMap(map);
-
+		map.put("id", id);
 		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 		JsonElement jsonElement = gson.toJsonTree(map);
-		Player player = gson.fromJson(jsonElement, Player.class);
-		return player;
+		DetailAttributes detailAttributes = gson.fromJson(jsonElement, DetailAttributes.class);
+		Information information = gson.fromJson(jsonElement, Information.class);
+		CombinedAttribtues combinedAttribtues = gson.fromJson(jsonElement, CombinedAttribtues.class);
+		return new Player(combinedAttribtues, detailAttributes, information);
 	}
 
 	private static Map<String, String> convertMap(Map<String, String> map) {

@@ -1,4 +1,4 @@
-package application;
+package utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
+import org.renjin.invoke.codegen.VarArgApplyBuilder;
 
 public class SoFifaParser {
 
@@ -39,7 +41,7 @@ public class SoFifaParser {
 	}
 
 	private static void processAdditionalData(TextNode textNode, Map<String, String> map) {
-		String text = textNode.text().trim();// TODO Auto-generated method stub
+		String text = textNode.text().trim();
 		List<String> splittedAttributes = Arrays.asList(text.split("[\\(||\\)]"));
 		for (String attribute : splittedAttributes) {
 			if (attribute.contains("Age"))
@@ -78,13 +80,45 @@ public class SoFifaParser {
 					map.put(selector, first.get().getWholeText());
 				else {
 					Element joinedFrom = element.selectFirst("a");
-					if(element != null)
+					if (element != null)
 						map.put(selector, joinedFrom.html());
 				}
 			}
 		}
 		if (!map.containsKey(selector))
 			map.put(selector, "");
+		return map;
+	}
+
+	public static Map<String, String> setCombinedAttributes(Document doc, Map<String, String> map, String id) {
+		Elements scriptTags = doc.getElementsByTag("script");
+		for (Element tag : scriptTags) {
+			for (DataNode node : tag.dataNodes()) {
+				if (node.getWholeData().contains(id)) {
+					List<String> vars = Arrays.asList(node.getWholeData().split(";", -1));
+					for(String var : vars) {
+						if(var.contains("pointPAC"))
+							map.put("pace", var.replaceAll("[^0-9]", ""));
+
+						if(var.contains("pointPAS"))
+							map.put("passing", var.replaceAll("[^0-9]", ""));
+
+						if(var.contains("pointSHO"))
+							map.put("shooting", var.replaceAll("[^0-9]", ""));
+
+						if(var.contains("pointDRI"))
+							map.put("dribbling", var.replaceAll("[^0-9]", ""));
+
+						if(var.contains("pointDEF"))
+							map.put("defending", var.replaceAll("[^0-9]", ""));
+
+						if(var.contains("pointPHY"))
+							map.put("physical", var.replaceAll("[^0-9]", ""));
+					}
+				}
+			}
+		}
+
 		return map;
 	}
 
