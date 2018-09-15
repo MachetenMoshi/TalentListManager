@@ -8,6 +8,7 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import controlbar.ControlBarView?>
 <?import javafx.scene.layout.Region?>
+<?scenebuilder-stylesheet /css/SoFifa.css?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="ControlBarView" fx:id="rootNode" fx:controller="controlbar.ControlBarController" alignment="CENTER_LEFT" spacing="15">
 
@@ -16,4 +17,7 @@
 	<JFXButton fx:id="btnRefresh" text="Refresh" onAction="#onRefresh"/> 
 	<JFXButton fx:id="btnAdd" text="Add" onAction="#onAdd"/> 
 	<JFXButton fx:id="btnOptions" text="Options" onAction="#onOptions"/> 
+	<styleClass>
+		<String fx:value="control-bar" />
+	</styleClass>
 </fx:root>
