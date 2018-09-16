@@ -92,34 +92,35 @@ public class SoFifaParser {
 
 	public static Map<String, String> setCombinedAttributes(Document doc, Map<String, String> map, String id) {
 		Elements scriptTags = doc.getElementsByTag("script");
-		for (Element tag : scriptTags) {
-			for (DataNode node : tag.dataNodes()) {
+		for (Element tag : scriptTags)
+			for (DataNode node : tag.dataNodes())
 				if (node.getWholeData().contains(id)) {
 					List<String> vars = Arrays.asList(node.getWholeData().split(";", -1));
-					for(String var : vars) {
-						if(var.contains("pointPAC"))
-							map.put("pace", var.replaceAll("[^0-9]", ""));
-
-						if(var.contains("pointPAS"))
-							map.put("passing", var.replaceAll("[^0-9]", ""));
-
-						if(var.contains("pointSHO"))
-							map.put("shooting", var.replaceAll("[^0-9]", ""));
-
-						if(var.contains("pointDRI"))
-							map.put("dribbling", var.replaceAll("[^0-9]", ""));
-
-						if(var.contains("pointDEF"))
-							map.put("defending", var.replaceAll("[^0-9]", ""));
-
-						if(var.contains("pointPHY"))
-							map.put("physical", var.replaceAll("[^0-9]", ""));
-					}
+					putPlayerValues(map, vars);
 				}
-			}
-		}
-
 		return map;
+	}
+
+	private static void putPlayerValues(Map<String, String> map, List<String> vars) {
+		for (String var : vars) {
+			if (var.contains("pointPAC"))
+				map.put("firstAttribute", var.replaceAll("[^0-9]", ""));
+
+			if (var.contains("pointPAS"))
+				map.put("secondAttribute", var.replaceAll("[^0-9]", ""));
+
+			if (var.contains("pointSHO"))
+				map.put("thirdAttribute", var.replaceAll("[^0-9]", ""));
+
+			if (var.contains("pointDRI"))
+				map.put("fourthAttribute", var.replaceAll("[^0-9]", ""));
+
+			if (var.contains("pointDEF"))
+				map.put("fifthAttribute", var.replaceAll("[^0-9]", ""));
+
+			if (var.contains("pointPHY"))
+				map.put("sixthAttribute", var.replaceAll("[^0-9]", ""));
+		}
 	}
 
 }

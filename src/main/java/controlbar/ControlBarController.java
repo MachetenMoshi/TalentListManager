@@ -47,6 +47,7 @@ public class ControlBarController implements Initializable {
 
 	@FXML
 	public void onRefresh(ActionEvent event) {
+		rootNode.fireEvent(new ControlBarEvent(ControlBarEvent.ON_UPDATE));
 	}
 
 	@FXML

@@ -3,8 +3,6 @@ package services;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import objects.Attributes;
-import objects.CombinedAttribtues;
+import objects.CombinedAttributes;
 import objects.DetailAttributes;
 import objects.Information;
 import objects.Player;
@@ -42,7 +40,7 @@ public class SoFifaService {
 		JsonElement jsonElement = gson.toJsonTree(map);
 		DetailAttributes detailAttributes = gson.fromJson(jsonElement, DetailAttributes.class);
 		Information information = gson.fromJson(jsonElement, Information.class);
-		CombinedAttribtues combinedAttribtues = gson.fromJson(jsonElement, CombinedAttribtues.class);
+		CombinedAttributes combinedAttribtues = gson.fromJson(jsonElement, CombinedAttributes.class);
 		return new Player(combinedAttribtues, detailAttributes, information);
 	}
 
@@ -58,9 +56,9 @@ public class SoFifaService {
 	private static Document loadPlayerPage(String urlString) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
-		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("89.40.127.28", 80));
+//		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("89.40.127.28", 80));
 		URL url = new URL(urlString);
-		HttpURLConnection con = (HttpURLConnection) url.openConnection(proxy);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestProperty("User-Agent",
 				"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
 

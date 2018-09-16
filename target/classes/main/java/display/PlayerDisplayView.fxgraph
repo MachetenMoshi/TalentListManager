@@ -23,28 +23,31 @@ dynamic component PlayerDisplayView controlledby PlayerDisplayController {
 			TableColumn id tcPotential {
 				text : "Potential"
 			},
-			TableColumn id tcPace {
-				text : "Schnelligkeit"
-			},
 
-			TableColumn id tcShooting {
+			TableColumn id tcCombinedFirst {
 				text : "Schuss"
 			},
-			TableColumn id tcDribbling {
+			TableColumn id tcCombinedSecond {
 				text : "Dribbling"
 			},
-			TableColumn id tcPassing {
+			TableColumn id tcCombinedThird {
 				text : "Passen"
 			},
-			TableColumn id tcDefending {
+			TableColumn id tcCombinedFourth {
 				text : "Defensive"
 			},
-			TableColumn id tcPhysical {
+			TableColumn id tcCombinedFifth {
 				text : "Körperlich"
+			},
+			TableColumn id tcCombinedSixth {
+				text : "Schnelligkeit"
 			},
 
 			TableColumn id tcSkillMoves {
 				text : "Spezialbewegungen"
+			},
+			TableColumn id tcPreferredFoot {
+				text : "Fuß"
 			},
 			TableColumn id tcWeakFoot {
 				text : "Schwacher Fuß"

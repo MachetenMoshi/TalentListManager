@@ -15,13 +15,14 @@
 		<TableColumn fx:id="tcPositions" text="Positions"/> 
 		<TableColumn fx:id="tcOverallRating" text="Gesamtstärke"/> 
 		<TableColumn fx:id="tcPotential" text="Potential"/> 
-		<TableColumn fx:id="tcPace" text="Schnelligkeit"/> 
-		<TableColumn fx:id="tcShooting" text="Schuss"/> 
-		<TableColumn fx:id="tcDribbling" text="Dribbling"/> 
-		<TableColumn fx:id="tcPassing" text="Passen"/> 
-		<TableColumn fx:id="tcDefending" text="Defensive"/> 
-		<TableColumn fx:id="tcPhysical" text="Körperlich"/> 
+		<TableColumn fx:id="tcCombinedFirst" text="Schuss"/> 
+		<TableColumn fx:id="tcCombinedSecond" text="Dribbling"/> 
+		<TableColumn fx:id="tcCombinedThird" text="Passen"/> 
+		<TableColumn fx:id="tcCombinedFourth" text="Defensive"/> 
+		<TableColumn fx:id="tcCombinedFifth" text="Körperlich"/> 
+		<TableColumn fx:id="tcCombinedSixth" text="Schnelligkeit"/> 
 		<TableColumn fx:id="tcSkillMoves" text="Spezialbewegungen"/> 
+		<TableColumn fx:id="tcPreferredFoot" text="Fuß"/> 
 		<TableColumn fx:id="tcWeakFoot" text="Schwacher Fuß"/> 
 		<TableColumn fx:id="tcWorkRate" text="Arbeitsraten"/> 
 		<TableColumn fx:id="tcJoined" text="Vertragsstart"/> 
