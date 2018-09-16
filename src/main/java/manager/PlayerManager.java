@@ -19,6 +19,7 @@ import javafx.stage.FileChooser;
 import objects.Player;
 import services.FileParserService;
 import services.SoFifaService;
+import utils.HtmlUtils;
 import utils.StringUtils;
 
 public class PlayerManager {
@@ -35,11 +36,12 @@ public class PlayerManager {
 
 	public void handleExport() {
 		StringBuffer content = StringUtils
-				.getContent(new InputStreamReader(getClass().getResourceAsStream("/html/template.html")));
+				.getContent(new InputStreamReader(getClass().getResourceAsStream(HtmlUtils.TEMPLATE_PATH)));
 		Document document = FileParserService.generateHtmlFile(Jsoup.parse(content.toString()),
 				playerDisplayView.getItems());
 		FileChooser fileChooser = new FileChooser();
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html");
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(HtmlUtils.HTML_FILTER_NAME,
+				HtmlUtils.HTML_FILTER_VALUE);
 		fileChooser.getExtensionFilters().add(extFilter);
 		File file = fileChooser.showSaveDialog(playerDisplayView.getScene().getWindow());
 		if (file != null)

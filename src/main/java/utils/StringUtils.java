@@ -3,6 +3,8 @@ package utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
 
 public class StringUtils {
 	public static boolean isInteger(String s) {
@@ -33,6 +35,22 @@ public class StringUtils {
 			}
 		}
 		return null;
+	}
+
+	public static List<String> splitOnWhitespaces(String value) {
+		return Arrays.asList(value.trim().split("\\s+"));
+	}
+
+	public static List<String> splitOnSemicolon(String value) {
+		return Arrays.asList(value.trim().split(";", -1));
+	}
+
+	public static List<String> splitOnBraces(String value) {
+		return Arrays.asList(value.trim().split("[\\(||\\)]"));
+	}
+
+	public static String removeAllNonDigits(String value) {
+		return value.replaceAll("[^0-9]", "");
 	}
 
 	public static StringBuffer getContent(InputStreamReader inputStreamReader) {

@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,7 +10,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.renjin.invoke.codegen.VarArgApplyBuilder;
+
+import objects.PlayerAttributes;
 
 public class SoFifaParser {
 
@@ -20,39 +20,39 @@ public class SoFifaParser {
 		List<TextNode> first = meta.childNodes().stream()
 				.filter(node -> node instanceof TextNode && !((TextNode) node).getWholeText().trim().isEmpty())
 				.map(arg -> (TextNode) arg).collect(Collectors.toList());
-		map.put("Name", first.get(0).text().trim());
+		map.put(PlayerAttributes.NAME, first.get(0).text().trim());
 		processAdditionalData(first.get(1), map);
 		Element countryElement = meta.selectFirst("a[title]");
-		map.put("Country", countryElement.attr("title"));
+		map.put(PlayerAttributes.COUNTRY, countryElement.attr("title"));
 		setPositions(map, meta);
 		return map;
 	}
 
 	private static void setPositions(Map<String, String> map, Element meta) {
-		Elements positions = meta.select("span");
+		Elements positions = meta.select(HtmlUtils.SPAN);
 		for (Element span : positions) {
-			if (span.attr("class") != null && span.attr("class").trim().toLowerCase().contains("pos")) {
-				if (map.containsKey("Positions"))
-					map.put("Positions", map.get("Positions").concat(" " + span.html()));
+			if (span.attr(HtmlUtils.CLASS) != null && span.attr(HtmlUtils.CLASS).trim().toLowerCase().contains("pos")) {
+				if (map.containsKey(PlayerAttributes.POSITIONS))
+					map.put(PlayerAttributes.POSITIONS, map.get(PlayerAttributes.POSITIONS).concat(" " + span.html()));
 				else
-					map.put("Positions", span.html());
+					map.put(PlayerAttributes.POSITIONS, span.html());
 			}
 		}
 	}
 
 	private static void processAdditionalData(TextNode textNode, Map<String, String> map) {
 		String text = textNode.text().trim();
-		List<String> splittedAttributes = Arrays.asList(text.split("[\\(||\\)]"));
+		List<String> splittedAttributes = StringUtils.splitOnBraces(text);
 		for (String attribute : splittedAttributes) {
-			if (attribute.contains("Age"))
-				map.put("Age", attribute.replaceFirst("Age", "").trim());
+			if (attribute.contains(PlayerAttributes.AGE))
+				map.put(PlayerAttributes.AGE, attribute.replaceFirst(PlayerAttributes.AGE, "").trim());
 			if (attribute.contains("cm") && attribute.contains("kg")) {
-				List<String> heightNWeight = Arrays.asList(attribute.trim().split("\\s+"));
+				List<String> heightNWeight = StringUtils.splitOnWhitespaces(attribute);
 				for (String physical : heightNWeight) {
 					if (physical.contains("cm"))
-						map.put("Height", physical.replaceFirst("cm", "").trim());
+						map.put(PlayerAttributes.HEIGHT, physical.replaceFirst("cm", "").trim());
 					if (physical.contains("kg"))
-						map.put("Weight", physical.replaceFirst("kg", "").trim());
+						map.put(PlayerAttributes.WEIGHT, physical.replaceFirst("kg", "").trim());
 				}
 
 			}
@@ -62,14 +62,11 @@ public class SoFifaParser {
 	}
 
 	public static Map<String, String> setEntry(Document doc, String selector, Map<String, String> map) {
-		if (selector.equals("Loaned From"))
-			selector.length();
-
-		Element element = doc.selectFirst("li:contains(" + selector + ")");
+		Element element = doc.selectFirst(HtmlUtils.listContains(selector));
 		if (element == null)
-			element = doc.selectFirst("div:containsOwn(" + selector + ")");
+			element = doc.selectFirst(HtmlUtils.divContainsOwn(selector));
 		if (element != null) {
-			Element span = element.selectFirst("span");
+			Element span = element.selectFirst(HtmlUtils.SPAN);
 			if (span != null) {
 				map.put(selector, span.html());
 			} else {
@@ -79,7 +76,7 @@ public class SoFifaParser {
 				if (first.isPresent())
 					map.put(selector, first.get().getWholeText());
 				else {
-					Element joinedFrom = element.selectFirst("a");
+					Element joinedFrom = element.selectFirst(HtmlUtils.A);
 					if (element != null)
 						map.put(selector, joinedFrom.html());
 				}
@@ -91,11 +88,11 @@ public class SoFifaParser {
 	}
 
 	public static Map<String, String> setCombinedAttributes(Document doc, Map<String, String> map, String id) {
-		Elements scriptTags = doc.getElementsByTag("script");
+		Elements scriptTags = doc.getElementsByTag(HtmlUtils.SCRIPT);
 		for (Element tag : scriptTags)
 			for (DataNode node : tag.dataNodes())
 				if (node.getWholeData().contains(id)) {
-					List<String> vars = Arrays.asList(node.getWholeData().split(";", -1));
+					List<String> vars = StringUtils.splitOnSemicolon(node.getWholeData());
 					putPlayerValues(map, vars);
 				}
 		return map;
@@ -103,23 +100,23 @@ public class SoFifaParser {
 
 	private static void putPlayerValues(Map<String, String> map, List<String> vars) {
 		for (String var : vars) {
-			if (var.contains("pointPAC"))
-				map.put("firstAttribute", var.replaceAll("[^0-9]", ""));
+			if (var.contains(PlayerAttributes.COMBINED_FIRST))
+				map.put("firstAttribute", StringUtils.removeAllNonDigits(var));
 
-			if (var.contains("pointPAS"))
-				map.put("secondAttribute", var.replaceAll("[^0-9]", ""));
+			if (var.contains(PlayerAttributes.COMBINED_SECOND))
+				map.put("secondAttribute", StringUtils.removeAllNonDigits(var));
 
-			if (var.contains("pointSHO"))
-				map.put("thirdAttribute", var.replaceAll("[^0-9]", ""));
+			if (var.contains(PlayerAttributes.COMBINED_THIRD))
+				map.put("thirdAttribute", StringUtils.removeAllNonDigits(var));
 
-			if (var.contains("pointDRI"))
-				map.put("fourthAttribute", var.replaceAll("[^0-9]", ""));
+			if (var.contains(PlayerAttributes.COMBINED_FOURTH))
+				map.put("fourthAttribute", StringUtils.removeAllNonDigits(var));
 
-			if (var.contains("pointDEF"))
-				map.put("fifthAttribute", var.replaceAll("[^0-9]", ""));
+			if (var.contains(PlayerAttributes.COMBINED_FIFTH))
+				map.put("fifthAttribute", StringUtils.removeAllNonDigits(var));
 
-			if (var.contains("pointPHY"))
-				map.put("sixthAttribute", var.replaceAll("[^0-9]", ""));
+			if (var.contains(PlayerAttributes.COMBINED_SIXTH))
+				map.put("sixthAttribute", StringUtils.removeAllNonDigits(var));
 		}
 	}
 

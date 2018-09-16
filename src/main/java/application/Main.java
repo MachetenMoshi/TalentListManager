@@ -8,13 +8,14 @@ import manager.MainManager;
 
 public class Main extends Application {
 
-	
+	private static final String CSS = "/css/SoFifa.css";
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			MainContainerView root = new MainContainerView();
-			Scene scene = new Scene(root, 400, 400);
-			scene.getStylesheets().add(getClass().getResource("/css/SoFifa.css").toExternalForm());
+			Scene scene = new Scene(root, 800, 400);
+			scene.getStylesheets().add(getClass().getResource(CSS).toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			new MainManager(root);
@@ -24,7 +25,6 @@ public class Main extends Application {
 		}
 	}
 
-	
 	public static void main(String[] args) {
 		launch(args);
 	}

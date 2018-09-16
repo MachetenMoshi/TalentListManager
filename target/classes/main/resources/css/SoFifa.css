@@ -6,7 +6,7 @@
 
 .control-bar {
 	-fx-background-color: -fx-highlight-color;
-	-fx-max-height: 45.0;
+	-fx-min-height: 35.0;
 }
 .jfx-text-field {
 	-jfx-focus-color: -fx-highlight-color;
