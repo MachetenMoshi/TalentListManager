@@ -32,6 +32,7 @@ public class MainContainerController implements Initializable {
 		jfxDrawer.setDefaultDrawerSize(250);
 		jfxDrawer.setResizeContent(true);
 		jfxDrawer.addInitDrawerCallback((param) -> false);
+		jfxDrawer.setOverLayVisible(false);
 	}
 
 	private void setListener() {

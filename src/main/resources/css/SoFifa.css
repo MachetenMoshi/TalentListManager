@@ -2,6 +2,8 @@
      -fx-base: #c8c5ce;
      -fx-text-color: #333235;
      -fx-highlight-color: #00b8ea;
+     -fx-background:WHITE;
+     -fx-control-inner-background:WHITE;
 }
 
 .control-bar {
@@ -14,7 +16,7 @@
 }
 .jfx-text-area {
 	-jfx-focus-color: -fx-highlight-color;
-		-jfx-unfocus-color: -fx-text-color;
+	-jfx-unfocus-color: -fx-text-color;
 }
 
 .jfx-text-area .content{
@@ -35,4 +37,44 @@
 -fx-border-style: solid;
 -fx-border-width: 4.0px;
 
+}
+
+
+.table-view{
+}
+.list-view:focused,
+.table-view:focused{
+	-fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 1;
+	
+}
+
+.table-view .column-header-background .filler {
+
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-color;
+}
+
+.table-view .column-header {
+    -fx-background-color: -fx-base;
+    -fx-pref-height:35.0;
+    -fx-border-style: solid;
+    -fx-border-width: 0.0 0.75 4.0 0.0;
+    -fx-border-color: darkgrey;	
+}
+
+.table-view .table-cell{
+}
+
+.table-row-cell{
+}
+
+.table-row-cell:odd{
+}
+
+.table-row-cell:selected {
 }

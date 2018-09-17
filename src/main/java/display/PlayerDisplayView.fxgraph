@@ -8,14 +8,17 @@ import javafx.scene.control.TableColumn
 dynamic component PlayerDisplayView controlledby PlayerDisplayController {
 	PlayerDisplayView id rootNode {
 		columns : [
-			TableColumn id tcAge {
-				text : "Alter"
-			},
 			TableColumn id tcName {
 				text : "Name"
 			},
+			TableColumn id tcAge {
+				text : "Alter"
+			},
 			TableColumn id tcPositions {
-				text : "Positions"
+				text : "Positionen"
+			},
+			TableColumn id tcTeam {
+				text : "Team"
 			},
 			TableColumn id tcOverallRating {
 				text : "Gesamtstärke"

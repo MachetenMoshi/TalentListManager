@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.swing.text.html.HTML;
+
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,15 +20,34 @@ public class SoFifaParser {
 
 	public static Map<String, String> setMetaData(Document doc, Map<String, String> map) {
 		Element meta = doc.selectFirst(".meta");
+
+		setName(doc, map);
+		setTeam(doc.selectFirst(HtmlUtils.hrefContainsTeam()), map);
 		List<TextNode> first = meta.childNodes().stream()
 				.filter(node -> node instanceof TextNode && !((TextNode) node).getWholeText().trim().isEmpty())
 				.map(arg -> (TextNode) arg).collect(Collectors.toList());
-		map.put(PlayerAttributes.NAME, first.get(0).text().trim());
 		processAdditionalData(first.get(1), map);
 		Element countryElement = meta.selectFirst("a[title]");
 		map.put(PlayerAttributes.COUNTRY, countryElement.attr("title"));
 		setPositions(map, meta);
 		return map;
+	}
+
+	private static void setTeam(Element team, Map<String, String> map) {
+		Optional<TextNode> first = team.childNodes().stream()
+				.filter(node -> node instanceof TextNode && !((TextNode) node).getWholeText().trim().isEmpty())
+				.map(arg -> (TextNode) arg).findFirst();
+		map.put("Team", first.isPresent() ? first.get().text() : "");
+	}
+
+	private static void setName(Document doc, Map<String, String> map) {
+		Elements header = doc.select(HtmlUtils.H1);
+		Optional<Element> nameElement = header.stream().filter(element -> element.wholeText().contains("ID"))
+				.findFirst();
+		if (nameElement.isPresent()) {
+			List<String> splitOnBraces = StringUtils.splitOnBraces(nameElement.get().wholeText());
+			map.put(PlayerAttributes.NAME, splitOnBraces.get(0));
+		}
 	}
 
 	private static void setPositions(Map<String, String> map, Element meta) {

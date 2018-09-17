@@ -3,13 +3,24 @@ package display;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPopup;
+import com.jfoenix.controls.JFXPopup.PopupHPosition;
+import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.sun.javafx.scene.control.SelectedCellsMap;
 
+import controlbar.ControlBarEvent;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import objects.Player;
 import utils.cellfactories.AttributeCellFactory;
 
@@ -51,6 +62,8 @@ public class PlayerDisplayController implements Initializable {
 	TableColumn<Player, String> tcCombinedFifth;
 	@FXML
 	TableColumn<Player, String> tcPreferredFoot;
+	@FXML
+	TableColumn<Player, String> tcTeam;
 
 	// @formatter:on
 	@Override
@@ -59,6 +72,30 @@ public class PlayerDisplayController implements Initializable {
 		setBindings();
 		rootNode.getItems()
 				.addListener((ListChangeListener.Change<? extends Player> c) -> handleListChange(rootNode.getItems()));
+
+		setContextMenu();
+
+	}
+
+	private void setContextMenu() {
+		JFXButton btnDelete = new JFXButton("Löschen");
+		JFXPopup popup = new JFXPopup(btnDelete);
+		btnDelete.setOnAction(evt -> handleOnDelete(evt, popup));
+		rootNode.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				if (t.getButton() == MouseButton.SECONDARY)
+					popup.show(rootNode, PopupVPosition.TOP, PopupHPosition.LEFT, t.getSceneX(), t.getSceneY() - 35);
+			}
+		});
+
+	}
+
+	private void handleOnDelete(ActionEvent evt, JFXPopup popup) {
+		if (rootNode.getSelectionModel().getSelectedItem() != null)
+			rootNode.getItems().remove(rootNode.getSelectionModel().getSelectedItem());
+		popup.hide();
+
 	}
 
 	private void handleListChange(ObservableList<Player> items) {
@@ -88,11 +125,14 @@ public class PlayerDisplayController implements Initializable {
 		tcCombinedFourth.setCellFactory(new AttributeCellFactory());
 		tcCombinedFifth.setCellFactory(new AttributeCellFactory());
 		tcCombinedSixth.setCellFactory(new AttributeCellFactory());
+		tcOverallRating.setCellFactory(new AttributeCellFactory());
+		tcPotential.setCellFactory(new AttributeCellFactory());
 	}
 
 	private void setBindings() {
 		tcAge.setCellValueFactory(cellData -> cellData.getValue().getInformation().ageProperty());
 		tcName.setCellValueFactory(cellData -> cellData.getValue().getInformation().nameProperty());
+		tcTeam.setCellValueFactory(cellData -> cellData.getValue().getInformation().teamProperty());
 		tcPositions.setCellValueFactory(cellData -> cellData.getValue().getInformation().positionsProperty());
 		tcOverallRating.setCellValueFactory(cellData -> cellData.getValue().getInformation().overallRatingProperty());
 		tcPotential.setCellValueFactory(cellData -> cellData.getValue().getInformation().potentialProperty());
