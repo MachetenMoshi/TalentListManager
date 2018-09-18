@@ -2,7 +2,9 @@ package maincontainer;
 
 import com.jfoenix.controls.JFXDrawer;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -14,6 +16,7 @@ public class MainContainerView extends StackPane {
 	private ObjectProperty<BorderPane> mainContainer = new SimpleObjectProperty<>();
 	private ObjectProperty<Node> drawerContent = new SimpleObjectProperty<>();
 	private ObjectProperty<JFXDrawer> drawer = new SimpleObjectProperty<>();
+	private BooleanProperty showMaskerPane = new SimpleBooleanProperty(false);
 
 	public MainContainerView() {
 		FXMLService.load(this);
@@ -61,6 +64,18 @@ public class MainContainerView extends StackPane {
 
 	final void setDrawer(final JFXDrawer drawer) {
 		this.drawerProperty().set(drawer);
+	}
+
+	public final BooleanProperty showMaskerPaneProperty() {
+		return this.showMaskerPane;
+	}
+
+	public final boolean isShowMaskerPane() {
+		return this.showMaskerPaneProperty().get();
+	}
+
+	public final void setShowMaskerPane(final boolean showMaskerPane) {
+		this.showMaskerPaneProperty().set(showMaskerPane);
 	}
 
 }

@@ -19,46 +19,48 @@ import javafx.stage.FileChooser;
 import objects.Player;
 import services.FileParserService;
 import services.SoFifaService;
+import tasks.HtmlExportTask;
+import tasks.PlayerLoadingTask;
+import tasks.PlayerUpdateTask;
 import utils.HtmlUtils;
 import utils.StringUtils;
+import utils.TaskManager;
 
 public class PlayerManager {
 
 	private PlayerDisplayView playerDisplayView = new PlayerDisplayView();
+	private TaskManager taskManager;
 
 	public PlayerDisplayView getPlayerDisplayView() {
 		return playerDisplayView;
 	}
 
-	public void handleNewPlayer(PlayerEvent evt) {
-		playerDisplayView.getItems().add(evt.getPlayer());
+	public void handleNewPlayer(Player newVal) {
+		playerDisplayView.getItems().add(newVal);
 	}
 
 	public void handleExport() {
-		StringBuffer content = StringUtils
-				.getContent(new InputStreamReader(getClass().getResourceAsStream(HtmlUtils.TEMPLATE_PATH)));
-		Document document = FileParserService.generateHtmlFile(Jsoup.parse(content.toString()),
-				playerDisplayView.getItems());
 		FileChooser fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(HtmlUtils.HTML_FILTER_NAME,
 				HtmlUtils.HTML_FILTER_VALUE);
 		fileChooser.getExtensionFilters().add(extFilter);
 		File file = fileChooser.showSaveDialog(playerDisplayView.getScene().getWindow());
-		if (file != null)
-			saveFile(document.toString(), file);
-
+		if (file != null) {
+			HtmlExportTask exportTask = new HtmlExportTask(playerDisplayView.getItems());
+			exportTask.valueProperty().addListener((obs, oldVal, newVal) -> handleExport(newVal, file));
+			taskManager.addTask(exportTask);
+		}
 	}
 
-	private void saveFile(String content, File file) {
+	private void handleExport(Document content, File file) {
 		try {
 			FileWriter fileWriter = null;
 			fileWriter = new FileWriter(file);
-			fileWriter.write(content);
+			fileWriter.write(content.toString());
 			fileWriter.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	public void handleFile(FileSelectorEvent evt) {
@@ -68,22 +70,29 @@ public class PlayerManager {
 
 	public void updatePlayers() {
 		ObservableList<Player> items = playerDisplayView.getItems();
-		SoFifaService soFifaService = new SoFifaService();
-		List<Player> updatedPlayers = new ArrayList<>();
-		for (Player player : items) {
-			try {
-				Player updatedPlayer = soFifaService.loadPlayer(player.getInformation().getId());
-				if (updatedPlayer != null)
-					updatedPlayer.getInformation().setComment(player.getInformation().getComment());
-				updatedPlayers.add(updatedPlayer);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		PlayerUpdateTask playerUpdateTask = new PlayerUpdateTask(items);
+		playerUpdateTask.valueProperty().addListener((obs, oldVal, newVal) -> handleUpdatedPlayers(items, newVal));
+		taskManager.addTask(playerUpdateTask);
+	}
+
+	private void handleUpdatedPlayers(ObservableList<Player> items, List<Player> updatedPlayers) {
 		List<Player> notUpdated = items.stream().filter(p -> !updatedPlayers.contains(p)).collect(Collectors.toList());
 		updatedPlayers.addAll(notUpdated);
 		playerDisplayView.getItems().setAll(updatedPlayers);
+	}
 
+	public void setTaskManager(TaskManager taskManager) {
+		this.taskManager = taskManager;
+
+	}
+
+	public void addPlayer(PlayerEvent evt) {
+		PlayerLoadingTask playerLoadingTask = new PlayerLoadingTask(evt.getId());
+		playerLoadingTask.valueProperty().addListener((obs, oldVal, newVal) -> {
+			newVal.getInformation().setComment(evt.getComment());
+			handleNewPlayer(newVal);
+		});
+		taskManager.addTask(playerLoadingTask);
 	}
 
 }

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
+import org.controlsfx.control.MaskerPane;
 
 public class MainContainerController implements Initializable {
 
@@ -18,11 +19,14 @@ public class MainContainerController implements Initializable {
 	MainContainerView rootNode;
 	@FXML
 	JFXDrawer jfxDrawer;
+	@FXML
+	MaskerPane maskerPane;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		rootNode.setMainContainer(mainContainer);
 		rootNode.setDrawer(jfxDrawer);
+		maskerPane.visibleProperty().bind(rootNode.showMaskerPaneProperty());
 		configureDrawer();
 		setListener();
 	}
