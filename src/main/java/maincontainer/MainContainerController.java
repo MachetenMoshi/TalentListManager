@@ -3,14 +3,13 @@ package maincontainer;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXDrawer;
+import org.controlsfx.control.MaskerPane;
 
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
-import org.controlsfx.control.MaskerPane;
+import utils.controls.JFXedDrawer;
 
 public class MainContainerController implements Initializable {
 
@@ -18,7 +17,7 @@ public class MainContainerController implements Initializable {
 	@FXML
 	MainContainerView rootNode;
 	@FXML
-	JFXDrawer jfxDrawer;
+	JFXedDrawer jfxDrawer;
 	@FXML
 	MaskerPane maskerPane;
 
@@ -32,6 +31,8 @@ public class MainContainerController implements Initializable {
 	}
 
 	private void configureDrawer() {
+		jfxDrawer.setResizableOnDrag(false);
+		jfxDrawer.setMiniDrawerSize(-1);
 		jfxDrawer.setContent(mainContainer);
 		jfxDrawer.setDefaultDrawerSize(250);
 		jfxDrawer.setResizeContent(true);

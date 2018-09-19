@@ -18,11 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import objects.PlayerAttributes;
+import objects.SecondaryInformation;
 import objects.CombinedAttributes;
 import objects.DetailAttributes;
 import objects.Information;
 import objects.Player;
-import utils.SoFifaParser;
 
 public class SoFifaService {
 	private static final String baseUrl = "https://sofifa.com/player/";
@@ -32,9 +32,10 @@ public class SoFifaService {
 		Map<String, String> map = new HashMap<>();
 
 		for (String label : PlayerAttributes.labels)
-			SoFifaParser.setEntry(doc, label, map);
-		map = SoFifaParser.setMetaData(doc, map);
-		map = SoFifaParser.setCombinedAttributes(doc, map, id);
+			SoFifaParserService.setEntry(doc, label, map);
+		map = SoFifaParserService.setMetaData(doc, map);
+		map = SoFifaParserService.setCombinedAttributes(doc, map, id);
+		map = SoFifaParserService.setTraits(doc, map);
 		map = convertMap(map);
 		map.put(PlayerAttributes.ID, id);
 		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -42,7 +43,8 @@ public class SoFifaService {
 		DetailAttributes detailAttributes = gson.fromJson(jsonElement, DetailAttributes.class);
 		Information information = gson.fromJson(jsonElement, Information.class);
 		CombinedAttributes combinedAttribtues = gson.fromJson(jsonElement, CombinedAttributes.class);
-		return new Player(combinedAttribtues, detailAttributes, information);
+		SecondaryInformation secondaryInformation = gson.fromJson(jsonElement, SecondaryInformation.class);
+		return new Player(combinedAttribtues, detailAttributes, information, secondaryInformation);
 	}
 
 	private static Map<String, String> convertMap(Map<String, String> map) {
@@ -57,7 +59,8 @@ public class SoFifaService {
 	private static Document loadPlayerPage(String urlString) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
-//		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("89.40.127.28", 80));
+		// Proxy proxy = new Proxy(Proxy.Type.HTTP, new
+		// InetSocketAddress("89.40.127.28", 80));
 		URL url = new URL(urlString);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestProperty("User-Agent",

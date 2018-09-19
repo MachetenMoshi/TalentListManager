@@ -6,10 +6,11 @@ import maincontainer.MainContainerView
 import javafx.scene.layout.BorderPane
 import com.jfoenix.controls.JFXDrawer
 import org.controlsfx.control.MaskerPane
+import utils.controls.JFXedDrawer
 
 dynamic component MainContainerView controlledby MainContainerController {
 	MainContainerView id rootNode {
-		JFXDrawer id jfxDrawer,
+		JFXedDrawer id jfxDrawer,
 		MaskerPane id maskerPane {
 			text : "Bitte warten...",
 			visible : false

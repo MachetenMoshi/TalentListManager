@@ -2,22 +2,28 @@ package objects;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Player {
 	private ObjectProperty<Information> information = new SimpleObjectProperty<>();
 	private ObjectProperty<CombinedAttributes> combinedAttributes = new SimpleObjectProperty<>();
 	private ObjectProperty<DetailAttributes> detailAttributes = new SimpleObjectProperty<>();
+	private ObjectProperty<SecondaryInformation> secondaryInformation = new SimpleObjectProperty<>();
 
 	public Player() {
 		setCombinedAttributes(new CombinedAttributes());
 		setDetailAttributes(new DetailAttributes());
 		setInformation(new Information());
+		setSecondaryInformation(new SecondaryInformation());
 	}
 
-	public Player(CombinedAttributes combinedAttributes, DetailAttributes detailAttributes, Information information) {
+	public Player(CombinedAttributes combinedAttributes, DetailAttributes detailAttributes, Information information,
+			SecondaryInformation secondaryInformation) {
 		setCombinedAttributes(combinedAttributes);
 		setDetailAttributes(detailAttributes);
 		setInformation(information);
+		setSecondaryInformation(secondaryInformation);
 	}
 
 	public final ObjectProperty<CombinedAttributes> combinedAttributesProperty() {
@@ -65,4 +71,17 @@ public class Player {
 		}
 		return false;
 	}
+
+	public final ObjectProperty<SecondaryInformation> secondaryInformationProperty() {
+		return this.secondaryInformation;
+	}
+
+	public final SecondaryInformation getSecondaryInformation() {
+		return this.secondaryInformationProperty().get();
+	}
+
+	public final void setSecondaryInformation(final SecondaryInformation secondaryInformation) {
+		this.secondaryInformationProperty().set(secondaryInformation);
+	}
+
 }

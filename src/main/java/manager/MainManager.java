@@ -7,6 +7,7 @@ import input.PlayerEvent;
 import maincontainer.MainContainerView;
 import utils.TaskManager;
 import utils.TaskManagerImpl;
+import utils.controls.JFXedDrawer;
 
 public class MainManager {
 
@@ -29,7 +30,14 @@ public class MainManager {
 		root.addEventHandler(ControlBarEvent.ON_EXPORT, evt -> playerManager.handleExport());
 		root.addEventHandler(FileSelectorEvent.ON_FILE_SELECTED, evt -> playerManager.handleFile(evt));
 		root.addEventHandler(PlayerEvent.ON_ADD, evt -> playerManager.addPlayer(evt));
-		root.addEventHandler(ControlBarEvent.ON_DRAWER_TOGGLE, evt -> root.getDrawer().toggle());
+		root.addEventHandler(ControlBarEvent.ON_DRAWER_TOGGLE, evt -> handleDrawerToggle(root.getDrawer(), evt));
+	}
+
+	private void handleDrawerToggle(JFXedDrawer drawer, ControlBarEvent evt) {
+		if (evt.isDrawerOpened())
+			drawer.open();
+		else
+			drawer.close();
 	}
 
 	private void configureMainView(MainContainerView root) {

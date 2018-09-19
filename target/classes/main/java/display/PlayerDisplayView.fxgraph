@@ -49,11 +49,11 @@ dynamic component PlayerDisplayView controlledby PlayerDisplayController {
 			TableColumn id tcSkillMoves {
 				text : "Spezialbewegungen"
 			},
-			TableColumn id tcPreferredFoot {
-				text : "Fuﬂ"
-			},
 			TableColumn id tcWeakFoot {
 				text : "Schwacher Fuﬂ"
+			},
+			TableColumn id tcPreferredFoot {
+				text : "Fuﬂ"
 			},
 			TableColumn id tcWorkRate {
 				text : "Arbeitsraten"

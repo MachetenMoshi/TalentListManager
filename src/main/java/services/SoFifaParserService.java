@@ -1,4 +1,4 @@
-package utils;
+package services;
 
 import java.util.List;
 import java.util.Map;
@@ -11,16 +11,18 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import objects.PlayerAttributes;
+import utils.HtmlUtils;
+import utils.StringUtils;
 
-public class SoFifaParser {
+public class SoFifaParserService {
 
 	public static Map<String, String> setMetaData(Document doc, Map<String, String> map) {
 		Element meta = doc.selectFirst(".meta");
-
 		setName(doc, map);
 		setTeam(doc.selectFirst(HtmlUtils.hrefContainsTeam()), map);
 		List<TextNode> first = meta.childNodes().stream()
@@ -140,6 +142,18 @@ public class SoFifaParser {
 			if (var.contains(PlayerAttributes.COMBINED_SIXTH))
 				map.put("sixthAttribute", StringUtils.removeAllNonDigits(var));
 		}
+	}
+
+	public static Map<String, String> setTraits(Document doc, Map<String, String> map) {
+		Elements traits = doc.selectFirst("h5:containsOwn(Traits)").parent().select("li");
+		StringBuilder traitsBuilder = new StringBuilder();
+		for (Element child : traits) {
+			traitsBuilder.append(child.wholeText());
+			if(traits.indexOf(child) < traits.size() -1)
+				traitsBuilder.append(", ");
+		}
+		map.put("Traits", traitsBuilder.toString());
+		return map;
 	}
 
 }

@@ -23,8 +23,8 @@
 		<TableColumn fx:id="tcCombinedFifth" text="Körperlich"/> 
 		<TableColumn fx:id="tcCombinedSixth" text="Schnelligkeit"/> 
 		<TableColumn fx:id="tcSkillMoves" text="Spezialbewegungen"/> 
-		<TableColumn fx:id="tcPreferredFoot" text="Fuß"/> 
 		<TableColumn fx:id="tcWeakFoot" text="Schwacher Fuß"/> 
+		<TableColumn fx:id="tcPreferredFoot" text="Fuß"/> 
 		<TableColumn fx:id="tcWorkRate" text="Arbeitsraten"/> 
 		<TableColumn fx:id="tcJoined" text="Vertragsstart"/> 
 		<TableColumn fx:id="tcLoanedFrom" text="Ausgeliehen?"/> 

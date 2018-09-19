@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import utils.JFXHamburgerHelper;
 
 public class ControlBarController implements Initializable {
 
@@ -26,23 +27,17 @@ public class ControlBarController implements Initializable {
 	JFXButton btnAdd;
 	@FXML
 	JFXButton btnOptions;
+	private JFXHamburgerHelper hamburgerHelper;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		initHamburger();
-
+		hamburgerHelper = new JFXHamburgerHelper(rootNode.drawerClosedProperty(), jfxHamburger);
+		setListener();
 	}
 
-	private void initHamburger() {
-		HamburgerSlideCloseTransition burgerTask = new HamburgerSlideCloseTransition(jfxHamburger);
-		burgerTask.setRate(-1);
-		jfxHamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
-			burgerTask.setRate(burgerTask.getRate() * -1);
-			burgerTask.play();
-			rootNode.fireEvent(new ControlBarEvent(ControlBarEvent.ON_DRAWER_TOGGLE));
-
-		});
-
+	private void setListener() {
+		hamburgerHelper.hamburgerStateAfterAnimationProperty().addListener((pbs, oldVal, newVal) -> rootNode
+				.fireEvent(new ControlBarEvent(ControlBarEvent.ON_DRAWER_TOGGLE, !newVal)));
 	}
 
 	@FXML

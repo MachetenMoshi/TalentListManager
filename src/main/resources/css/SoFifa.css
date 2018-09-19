@@ -626,3 +626,22 @@
 .jfx-tree-table-view .column-resize-line, .jfx-tree-table-view .column-drag-header {
     -fx-background-color: derive(-fx-base-color,25.0%);
 }
+
+
+.jfx-hamburger-icon {
+	-fx-cursor:hand;
+	-fx-spacing:5.0;
+	-fx-min-width:30.0;
+}
+.jfx-hamburger-icon:hover StackPane {
+	  -fx-background-color : -fx-base-color;
+
+	
+}
+.jfx-hamburger-icon StackPane{
+    -fx-pref-width: 20.0px;
+    -fx-pref-height: 2.0px;
+    -fx-background-color : -fx-base-border-color;
+    -fx-background-radius : 1.0px;
+}
+		

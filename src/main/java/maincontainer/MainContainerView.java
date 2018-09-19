@@ -10,12 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import utils.FXMLService;
+import utils.controls.JFXedDrawer;
 
 public class MainContainerView extends StackPane {
 
 	private ObjectProperty<BorderPane> mainContainer = new SimpleObjectProperty<>();
 	private ObjectProperty<Node> drawerContent = new SimpleObjectProperty<>();
-	private ObjectProperty<JFXDrawer> drawer = new SimpleObjectProperty<>();
+	private ObjectProperty<JFXedDrawer> drawer = new SimpleObjectProperty<>();
 	private BooleanProperty showMaskerPane = new SimpleBooleanProperty(false);
 
 	public MainContainerView() {
@@ -54,15 +55,15 @@ public class MainContainerView extends StackPane {
 		this.drawerContentProperty().set(drawerContent);
 	}
 
-	final ObjectProperty<JFXDrawer> drawerProperty() {
+	final ObjectProperty<JFXedDrawer> drawerProperty() {
 		return this.drawer;
 	}
 
-	public final JFXDrawer getDrawer() {
+	public final JFXedDrawer getDrawer() {
 		return this.drawerProperty().get();
 	}
 
-	final void setDrawer(final JFXDrawer drawer) {
+	final void setDrawer(final JFXedDrawer drawer) {
 		this.drawerProperty().set(drawer);
 	}
 
