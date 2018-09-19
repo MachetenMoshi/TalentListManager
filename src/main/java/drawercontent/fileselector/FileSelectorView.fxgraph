@@ -1,0 +1,18 @@
+package drawercontent.fileselector
+
+import javafx.scene.layout.HBox
+import drawercontent.fileselector.FileSelectorController
+import drawercontent.fileselector.FileSelectorView
+import drawercontent.header.HeaderView
+import javafx.scene.control.ListView
+
+dynamic component FileSelectorView controlledby FileSelectorController {
+	FileSelectorView id rootNode {
+		HeaderView id headerView {
+			text : "Dateien"
+		},
+		ListView id lvFiles {
+			static vgrow : "ALWAYS"
+		}
+	}
+}

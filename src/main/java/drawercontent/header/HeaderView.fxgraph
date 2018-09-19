@@ -1,0 +1,27 @@
+package drawercontent.header
+
+import javafx.scene.layout.HBox
+import drawercontent.header.HeaderController
+import drawercontent.header.HeaderView
+import javafx.scene.control.Label
+import javafx.scene.layout.Region
+import com.jfoenix.controls.JFXButton
+import javafx.scene.control.Separator
+
+dynamic component HeaderView controlledby HeaderController {
+	HeaderView id rootNode {
+		styleClass : [
+			"header-view"
+		],
+		alignment : "CENTER_LEFT",
+		Label id lblText {
+
+		},
+		Region {
+			static hgrow : "ALWAYS"
+		},
+		JFXButton id btnAction {
+
+		}
+	}
+} 

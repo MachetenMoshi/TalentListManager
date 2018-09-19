@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script
+	src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript"
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+
+<script>
+	$(function() {
+		$("#playerTable").tablesorter({
+			widgets : [ 'zebra' ]
+		});
+	});
+</script>
+<meta name="playerListJson">
+<style>
+#playerTable {
+	width: 100%;
+}
+
+#playerTable td, #playerTable th {
+	padding: 8px;
+	text-align: center;
+}
+
+}
+#playerTable tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#playerTable tr:hover {
+	background-color: #ddd;
+}
+
+#playerTable td {
+	overflow: hidden;
+	font-family: arial;
+	text-shadow: 0px 0 black, 0 0px black, 0px 0 black, 0 0px black;
+}
+
+#playerTable th {
+	overflow: hidden;
+	font-weight: bold;
+	font-family: arial;
+	color: transparent;
+	background-color: #00b8ea;  
+}
+
+@media print {
+	.ui-table-columntoggle-btn {
+		display: none;
+	}
+}
+</style>
+
+</head>
+<body>
+
+	<h1 id="mainHeader"></h1>
+
+	<div id="playerTableContainer">
+		<table data-role="table" data-mode="columntoggle"
+			class="ui-responsive tablesorter" id="playerTable">
+		</table>
+
+	</div>
+
+</body>
+</html>

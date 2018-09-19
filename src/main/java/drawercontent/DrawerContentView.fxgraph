@@ -1,0 +1,24 @@
+package drawercontent
+
+import javafx.scene.layout.HBox
+import drawercontent.DrawerContentController
+import drawercontent.DrawerContentView
+import javafx.scene.layout.Region
+import drawercontent.filter.FilterView
+import drawercontent.fileselector.FileSelectorView
+dynamic component DrawerContentView controlledby DrawerContentController styledwith "/css/SoFifa.css" {
+	DrawerContentView id rootNode {
+		Region {
+			styleClass : [
+				"control-bar"
+			]
+		},
+		FilterView id filterView {
+			visible : false,
+			managed : false
+		},
+		FileSelectorView id fileSelectorView {
+			static vgrow : "ALWAYS"
+		}
+	}
+} 

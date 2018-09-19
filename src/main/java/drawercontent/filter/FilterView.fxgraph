@@ -1,0 +1,57 @@
+package drawercontent.filter
+
+import javafx.scene.layout.HBox
+import drawercontent.filter.FilterController
+import drawercontent.filter.FilterView
+import drawercontent.header.HeaderView
+import javafx.scene.layout.GridPane
+import javafx.scene.control.Label
+import com.jfoenix.controls.JFXTextField
+import javafx.scene.layout.ColumnConstraints
+
+dynamic component FilterView controlledby FilterController {
+	FilterView id rootNode {
+		HeaderView id headerView {
+			text : "Filter",
+			actionButtonVisible : false
+		},
+		GridPane {
+			vgap : 15,
+			hgap : 10,
+			columnConstraints : [
+				ColumnConstraints {
+					percentWidth : 25
+				}
+			],
+			Label {
+				text : "Name",
+				static columnIndex : 0,
+				static rowIndex : 0
+			},
+			JFXTextField id tfName {
+				static columnIndex : 1,
+				static rowIndex : 0,
+				static columnSpan : 2
+			},
+			Label {
+				text : "Alter",
+				static columnIndex : 0,
+				static rowIndex : 1
+			},
+			JFXTextField id tfAgeFrom {
+				promptText : "von",
+				labelFloat : true,
+				static columnIndex : 1,
+				static rowIndex : 1
+			},
+			JFXTextField id tfAgeTo {
+				promptText : "bis",
+				labelFloat : true,
+				static columnIndex : 2,
+				static rowIndex : 1
+			}
+
+
+		}
+	}
+}

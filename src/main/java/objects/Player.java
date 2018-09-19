@@ -28,7 +28,7 @@ public class Player {
 
 	public final ObjectProperty<CombinedAttributes> combinedAttributesProperty() {
 		return this.combinedAttributes;
-	}
+	} 
 
 	public final CombinedAttributes getCombinedAttributes() {
 		return this.combinedAttributesProperty().get();
