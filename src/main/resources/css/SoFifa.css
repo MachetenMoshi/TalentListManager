@@ -20,6 +20,7 @@
 .header {
 	-fx-font-size:16.0;
 	-fx-font-weight:bold;
+	-fx-text-fill:-fx-base-background-color;
 }
 .control-bar {
 	-fx-background-color: -fx-highlight-color;
