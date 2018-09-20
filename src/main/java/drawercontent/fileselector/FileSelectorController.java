@@ -5,6 +5,8 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import drawercontent.header.HeaderView;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -15,6 +17,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import utils.cellfactories.FileCellFactory;
+import utils.svg.SVG;
+import utils.svg.SVGLoader;
 
 public class FileSelectorController implements Initializable {
 
@@ -24,10 +28,15 @@ public class FileSelectorController implements Initializable {
 	HeaderView headerView;
 	@FXML
 	ListView<File> lvFiles;
+	private static final String SVG_SIZE = "svg-button-small";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		headerView.setActionEventHander(evt -> onSelectFilePath(evt));
+		JFXButton btnFileSelection = new JFXButton();
+		btnFileSelection.getStyleClass().add("svg-hover-button");
+		btnFileSelection.setGraphic(SVGLoader.loadSVGGlyph(SVG.FILE, SVG_SIZE));
+		headerView.setActionNode(btnFileSelection);
+		btnFileSelection.setOnAction(evt -> onSelectFilePath(evt));
 		setListener();
 		setBindings();
 	}

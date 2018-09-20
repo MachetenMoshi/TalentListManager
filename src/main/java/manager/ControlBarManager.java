@@ -8,6 +8,8 @@ import controlbar.ControlBarEvent;
 import controlbar.ControlBarView;
 import input.PlayerEvent;
 import input.PlayerInputView;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.stage.Window;
@@ -18,10 +20,11 @@ import services.SoFifaService;
 
 public class ControlBarManager {
 	private ControlBarView controlBarView = new ControlBarView();
+	private StringProperty headerHint = new SimpleStringProperty();
 
 	public ControlBarManager() {
+		controlBarView.headerTextProperty().bind(headerHint);
 	}
-
 
 	void handleOnAdd(ControlBarEvent evt, Region root) {
 		PlayerInputView inputView = new PlayerInputView();
@@ -36,13 +39,12 @@ public class ControlBarManager {
 		popup.show(root, PopupVPosition.TOP, PopupHPosition.LEFT, root.getWidth() - width, 30);
 	}
 
-
 	public ControlBarView getControlBarView() {
 		return controlBarView;
 	}
 
 	public void handleOnOptions(ControlBarEvent evt, MainContainerView root) {
-		OptionsView optionsView = new OptionsView();
+		OptionsView optionsView = new OptionsView(headerHint.get());
 		int width = 100;
 		optionsView.setMaxWidth(width);
 		optionsView.setMaxHeight(50);
@@ -51,6 +53,10 @@ public class ControlBarManager {
 			popup.hide();
 			controlBarView.fireEvent(playerEvent);
 		});
-		popup.show(root, PopupVPosition.TOP, PopupHPosition.LEFT, root.getWidth() - width, 30);
+		popup.show(root, PopupVPosition.TOP, PopupHPosition.LEFT, root.getWidth() - width / 2, 30);
+	}
+
+	public void setHeaderHint(String header) {
+		this.headerHint.set(header);
 	}
 }

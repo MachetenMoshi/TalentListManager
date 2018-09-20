@@ -29,6 +29,7 @@ public class HtmlUtils {
 	public static final String HTML_FILTER_VALUE = "*.html";
 
 	public static final String TEMPLATE_PATH = "/html/template.html";
+	public static final String ID_MAIN_HEADER = "#mainHeader";
 
 	public static String getAsTableCell(String string) {
 		return TD + string + CLOSING_TD;

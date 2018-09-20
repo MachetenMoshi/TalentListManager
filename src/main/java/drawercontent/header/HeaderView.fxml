@@ -4,16 +4,16 @@
 -->
 
 <?import java.lang.*?>
-<?import com.jfoenix.controls.JFXButton?>
 <?import drawercontent.header.HeaderView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="HeaderView" fx:id="rootNode" fx:controller="drawercontent.header.HeaderController" alignment="CENTER_LEFT">
 
 	<Label fx:id="lblText"/> 
 	<Region HeaderView.hgrow="ALWAYS"/> 
-	<JFXButton fx:id="btnAction"/> 
+	<HBox fx:id="actionContainer" alignment="CENTER"/> 
 	<styleClass>
 		<String fx:value="header-view" />
 	</styleClass>

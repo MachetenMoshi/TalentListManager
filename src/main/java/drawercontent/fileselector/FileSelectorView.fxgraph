@@ -8,6 +8,7 @@ import javafx.scene.control.ListView
 
 dynamic component FileSelectorView controlledby FileSelectorController {
 	FileSelectorView id rootNode {
+		
 		HeaderView id headerView {
 			text : "Dateien"
 		},

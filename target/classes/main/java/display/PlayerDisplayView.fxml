@@ -5,10 +5,14 @@
 
 <?import java.lang.*?>
 <?import display.PlayerDisplayView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="PlayerDisplayView" fx:id="rootNode" fx:controller="display.PlayerDisplayController">
 
+	<placeholder>
+		<Label text="Noch keine Spielerdaten vorhanden"/> 
+	</placeholder>
 	<columns>
 		<TableColumn fx:id="tcName" text="Name"/> 
 		<TableColumn fx:id="tcAge" text="Alter"/> 

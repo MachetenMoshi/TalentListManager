@@ -14,11 +14,20 @@ public class FileSelectorEvent extends Event {
 			"FileSelectorEventOnShowFileSelection");
 	public static final EventType<FileSelectorEvent> ON_FILE_SELECTED = new EventType<>(Event.ANY,
 			"FileSelectorEventOnFileSelected");
+	public static final EventType<FileSelectorEvent> ON_NEW_HEADER = new EventType<>(Event.ANY,
+			"FileSelectorEventOnNewHeader");
 
 	private File file;
 
+	private String header;
+
 	public FileSelectorEvent(EventType<? extends Event> arg0) {
 		super(arg0);
+	}
+
+	public FileSelectorEvent(EventType<? extends Event> arg0, String header) {
+		super(arg0);
+		this.header = header;
 	}
 
 	public FileSelectorEvent(EventType<? extends Event> arg0, File file) {
@@ -28,5 +37,9 @@ public class FileSelectorEvent extends Event {
 
 	public File getFile() {
 		return file;
+	}
+
+	public String getHeader() {
+		return header;
 	}
 }

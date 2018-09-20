@@ -20,8 +20,8 @@ dynamic component HeaderView controlledby HeaderController {
 		Region {
 			static hgrow : "ALWAYS"
 		},
-		JFXButton id btnAction {
-
+		HBox id actionContainer {
+			alignment : "CENTER"
 		}
 	}
 } 

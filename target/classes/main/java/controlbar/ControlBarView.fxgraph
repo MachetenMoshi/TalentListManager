@@ -6,30 +6,47 @@ import controlbar.ControlBarView
 import com.jfoenix.controls.JFXHamburger
 import javafx.scene.layout.Region
 import com.jfoenix.controls.JFXButton
+import javafx.geometry.Insets
+import javafx.scene.control.Label
 
 dynamic component ControlBarView controlledby ControlBarController styledwith "/css/SoFifa.css" {
 	ControlBarView id rootNode {
 		styleClass : [
-			"control-bar" 
+			"control-bar"
 		],
 		alignment : "CENTER_LEFT",
 		spacing : 15,
+		padding : Insets {
+			left : 5,
+			right : 15
+		},
 		JFXHamburger id jfxHamburger {
-
+			styleClass : [
+				"jfx-hamburger-icon"
+			]
+		},
+		Label id lblHeader {
+			styleClass : ["header"]
 		},
 		Region {
 			static hgrow : "ALWAYS"
 		},
 		JFXButton id btnRefresh {
-			text : "Refresh",
+			styleClass : [
+				"svg-hover-button"
+			],
 			onAction : controllermethod onRefresh
 		},
 		JFXButton id btnAdd {
-			text : "Add",
+			styleClass : [
+				"svg-hover-button"
+			],
 			onAction : controllermethod onAdd
 		},
 		JFXButton id btnOptions {
-			text : "Options",
+			styleClass : [
+				"svg-hover-button"
+			],
 			onAction : controllermethod onOptions
 		}
 	}

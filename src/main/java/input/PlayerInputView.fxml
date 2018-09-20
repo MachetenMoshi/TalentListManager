@@ -9,12 +9,21 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import input.PlayerInputView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="PlayerInputView" fx:id="rootNode" fx:controller="input.PlayerInputViewController" spacing="20">
 
 	<JFXTextField fx:id="tfId" promptText="ID" labelFloat="true"/> 
-	<JFXTextArea fx:id="taComment" promptText="Comment" labelFloat="true"/> 
-	<JFXButton fx:id="btnAdd" text="Add" onAction="#onAdd"/> 
+	<JFXTextArea fx:id="taComment" promptText="Kommentar" labelFloat="true"/> 
+	<HBox> 
+		<Region HBox.hgrow="ALWAYS"/> 
+		<JFXButton fx:id="btnAdd" onAction="#onAdd"> 
+			<styleClass>
+				<String fx:value="svg-hover-button" />
+			</styleClass>
+		</JFXButton>
+	</HBox>
 	<padding>
 		<Insets top="15" left="5" right="5" bottom="10"/> 
 	</padding>

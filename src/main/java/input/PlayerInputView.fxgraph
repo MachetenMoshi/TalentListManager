@@ -9,6 +9,8 @@ import javafx.scene.control.TextField
 import com.jfoenix.controls.JFXTextArea
 import com.jfoenix.controls.JFXButton
 import javafx.geometry.Insets
+import javafx.scene.layout.HBox
+import javafx.scene.layout.Region
 
 dynamic component PlayerInputView controlledby PlayerInputViewController {
 	PlayerInputView id rootNode {
@@ -24,12 +26,20 @@ dynamic component PlayerInputView controlledby PlayerInputViewController {
 			labelFloat : true
 		},
 		JFXTextArea id taComment {
-			promptText : "Comment",
+			promptText : "Kommentar",
 			labelFloat : true
 		},
-		JFXButton id btnAdd {
-			text : "Add",
-			onAction : controllermethod onAdd
+		HBox {
+			Region {
+				static hgrow : "ALWAYS"
+			},
+			JFXButton id btnAdd {
+				styleClass : [
+					"svg-hover-button"
+				],
+				onAction : controllermethod onAdd
+			}
 		}
+
 	}
 }

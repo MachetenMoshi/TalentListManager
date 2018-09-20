@@ -1,12 +1,26 @@
 * {
-     -fx-base: #c8c5ce;
+     -fx-base-color: #c8c5ce;
      -fx-text-color: #333235;
      -fx-highlight-color: #00b8ea;
      -fx-base-background-color: #4e4d4d;
      -fx-background:WHITE;
      -fx-control-inner-background:WHITE;
+     -fx-base-bright-border-color:#c8c5ce;
 }
 
+.svg-button-small {
+	-jfx-size:15.0;
+}
+.svg-button-medium {
+	-jfx-size:20.0;
+}
+.svg-button-large {
+	-jfx-size:30.0;
+}
+.header {
+	-fx-font-size:16.0;
+	-fx-font-weight:bold;
+}
 .control-bar {
 	-fx-background-color: -fx-highlight-color;
 	-fx-min-height: 35.0;
@@ -26,14 +40,17 @@
 }
 
 .header-view {
-	-fx-background-color: -fx-base;
+	-fx-padding: 0.0 5.0 0.0 5.0;
+	-fx-background-color: -fx-base-color;
 	-fx-min-height:35.0;
     -fx-border-style: solid;
     -fx-border-width: 0.0 0.0 3.0 0.0;
     -fx-border-color: darkgrey;	
 }
 
-
+.header-view .label {
+	-fx-font-weight: bold;
+}
 .solid-separator *.line { 
 -fx-border-style: solid;
 -fx-border-width: 4.0px;
@@ -61,7 +78,7 @@
 }
 
 .table-view .column-header {
-    -fx-background-color: -fx-base;
+    -fx-background-color: -fx-base-color;
     -fx-pref-height:35.0;
     -fx-border-style: solid;
     -fx-border-width: 0.0 0.75 4.0 0.0;
@@ -211,14 +228,13 @@
  
   .svg-hover-button >.jfx-svg-glyph{
  	-fx-background-color: transparent;
- 	-fx-background-color: -fx-base-bright-border-color;
+ 	-fx-background-color: -fx-base-background-color;
  }
  
   .svg-hover-button:hover >.jfx-svg-glyph{
- 	-fx-background-color: -fx-base-color;
- }
+ 	-fx-background-color:   -fx-base-bright-border-color;}
    .svg-hover-button:pressed >.jfx-svg-glyph{
- 	-fx-background-color: derive(-fx-base-color,30.0%);
+ 	-fx-background-color: derive(-fx-base-bright-border-color,30.0%);
  }
  .svg-hover-button:hover{
  	-fx-background-color:transparent;
@@ -639,9 +655,9 @@
 	
 }
 .jfx-hamburger-icon StackPane{
-    -fx-pref-width: 20.0px;
-    -fx-pref-height: 2.0px;
-    -fx-background-color : -fx-base-border-color;
+    -fx-pref-width: 25.0px;
+    -fx-pref-height: 3.0px;
+    -fx-background-color :-fx-base-background-color;
     -fx-background-radius : 1.0px;
 }
 		

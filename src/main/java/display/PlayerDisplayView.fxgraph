@@ -4,9 +4,13 @@ import javafx.scene.layout.AnchorPane
 import display.PlayerDisplayController
 import display.PlayerDisplayView
 import javafx.scene.control.TableColumn
+import javafx.scene.control.Label
 
 dynamic component PlayerDisplayView controlledby PlayerDisplayController {
 	PlayerDisplayView id rootNode {
+		placeholder : Label {
+			text : "Noch keine Spielerdaten vorhanden"
+		},
 		columns : [
 			TableColumn id tcName {
 				text : "Name"

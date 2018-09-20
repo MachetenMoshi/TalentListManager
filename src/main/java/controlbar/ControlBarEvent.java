@@ -16,9 +16,15 @@ public class ControlBarEvent extends Event {
 	public static final EventType<ControlBarEvent> ON_EXPORT = new EventType<>(ANY, "ControlBarEventExport");
 
 	private boolean drawerOpened;
+	private String exportHeader;
 
 	public ControlBarEvent(EventType<? extends Event> eventType) {
 		super(eventType);
+	}
+
+	public ControlBarEvent(EventType<? extends Event> eventType, String exportHeader) {
+		super(eventType);
+		this.exportHeader = exportHeader;
 	}
 
 	public ControlBarEvent(EventType<ControlBarEvent> eventType, boolean opened) {
@@ -28,5 +34,8 @@ public class ControlBarEvent extends Event {
 
 	public boolean isDrawerOpened() {
 		return drawerOpened;
+	}
+	public String getExportHeader() {
+		return exportHeader;
 	}
 }

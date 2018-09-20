@@ -79,4 +79,15 @@ public class TranslateUtils {
 		Optional<TranslationPair> first = positions.stream().filter(p -> p.getFieldName().equals(position)).findFirst();
 		return first.isPresent() ? first.get().getReadableName() : position;
 	}
+
+	public static String tryTranslatingBasics(String value) {
+		value = value.replaceAll("Right", "Rechts");
+		value = value.replaceAll("Left", "Links");
+		value = value.replaceAll("High", "Hoch");
+		value = value.replaceAll("Medium", "Mittel");
+		value = value.replaceAll("Low", "Niedrig");
+		value = value.replaceAll("/ ", " - ");
+		return value;
+
+	}
 }

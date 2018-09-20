@@ -14,6 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import utils.JFXHamburgerHelper;
+import utils.svg.SVG;
+import utils.svg.SVGLoader;
+import javafx.scene.control.Label;
 
 public class ControlBarController implements Initializable {
 
@@ -29,15 +32,27 @@ public class ControlBarController implements Initializable {
 	JFXButton btnOptions;
 	private JFXHamburgerHelper hamburgerHelper;
 
+	private static final String SVG_SIZE = "svg-button-medium";
+	@FXML
+	Label lblHeader;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		hamburgerHelper = new JFXHamburgerHelper(rootNode.drawerClosedProperty(), jfxHamburger);
+		lblHeader.textProperty().bind(rootNode.headerTextProperty());
 		setListener();
+		setGlyphs();
 	}
 
 	private void setListener() {
 		hamburgerHelper.hamburgerStateAfterAnimationProperty().addListener((pbs, oldVal, newVal) -> rootNode
 				.fireEvent(new ControlBarEvent(ControlBarEvent.ON_DRAWER_TOGGLE, !newVal)));
+	}
+
+	private void setGlyphs() {
+		btnAdd.setGraphic(SVGLoader.loadSVGGlyph(SVG.PLAYER_ADD, SVG_SIZE));
+		btnRefresh.setGraphic(SVGLoader.loadSVGGlyph(SVG.REFRESH, SVG_SIZE));
+		btnOptions.setGraphic(SVGLoader.loadSVGGlyph(SVG.OPTIONS, SVG_SIZE));
 	}
 
 	@FXML
@@ -48,7 +63,6 @@ public class ControlBarController implements Initializable {
 	@FXML
 	public void onAdd(ActionEvent event) {
 		rootNode.fireEvent(new ControlBarEvent(ControlBarEvent.ON_ADD));
-
 	}
 
 	@FXML

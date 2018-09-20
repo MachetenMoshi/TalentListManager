@@ -53,6 +53,10 @@ public class StringUtils {
 		return value.replaceAll("[^0-9]", "");
 	}
 
+	public static boolean isNullOrEmpty(String value) {
+		return value == null || value.isEmpty();
+	}
+
 	public static StringBuffer getContent(InputStreamReader inputStreamReader) {
 		BufferedReader in = new BufferedReader(inputStreamReader);
 		String inputLine;

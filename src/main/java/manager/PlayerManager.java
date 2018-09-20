@@ -11,11 +11,14 @@ import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import controlbar.ControlBarEvent;
 import display.PlayerDisplayView;
 import drawercontent.fileselector.FileSelectorEvent;
 import input.PlayerEvent;
 import javafx.collections.ObservableList;
+import javafx.event.EventType;
 import javafx.stage.FileChooser;
+import javafx.util.Pair;
 import objects.Player;
 import services.FileParserService;
 import services.SoFifaService;
@@ -30,6 +33,7 @@ public class PlayerManager {
 
 	private PlayerDisplayView playerDisplayView = new PlayerDisplayView();
 	private TaskManager taskManager;
+	private String header = "";
 
 	public PlayerDisplayView getPlayerDisplayView() {
 		return playerDisplayView;
@@ -39,14 +43,14 @@ public class PlayerManager {
 		playerDisplayView.getItems().add(newVal);
 	}
 
-	public void handleExport() {
+	public void handleExport(ControlBarEvent evt) {
 		FileChooser fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(HtmlUtils.HTML_FILTER_NAME,
 				HtmlUtils.HTML_FILTER_VALUE);
 		fileChooser.getExtensionFilters().add(extFilter);
 		File file = fileChooser.showSaveDialog(playerDisplayView.getScene().getWindow());
 		if (file != null) {
-			HtmlExportTask exportTask = new HtmlExportTask(playerDisplayView.getItems());
+			HtmlExportTask exportTask = new HtmlExportTask(playerDisplayView.getItems(), evt.getExportHeader());
 			exportTask.valueProperty().addListener((obs, oldVal, newVal) -> handleExport(newVal, file));
 			taskManager.addTask(exportTask);
 		}
@@ -64,8 +68,9 @@ public class PlayerManager {
 	}
 
 	public void handleFile(FileSelectorEvent evt) {
-		List<Player> players = FileParserService.handleFile(evt);
-		playerDisplayView.getItems().setAll(players);
+		Pair<String, List<Player>> players = FileParserService.handleFile(evt);
+		playerDisplayView.fireEvent(new FileSelectorEvent(FileSelectorEvent.ON_NEW_HEADER, players.getKey()));
+		playerDisplayView.getItems().setAll(players.getValue());
 	}
 
 	public void updatePlayers() {

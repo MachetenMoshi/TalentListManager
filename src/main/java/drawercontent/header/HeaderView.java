@@ -6,32 +6,17 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import utils.FXMLService;
 
 public class HeaderView extends HBox {
 
-	private ObjectProperty<EventHandler<ActionEvent>> actionEventHander = new SimpleObjectProperty<>();
 	private StringProperty text = new SimpleStringProperty();
-	private BooleanProperty actionButtonVisible = new SimpleBooleanProperty(true);
+	private ObjectProperty<Node> actionNode = new SimpleObjectProperty<>();
 
 	public HeaderView() {
 		FXMLService.load(this);
-	}
-
-	public final ObjectProperty<EventHandler<ActionEvent>> actionEventHanderProperty() {
-		return this.actionEventHander;
-	}
-
-	public final EventHandler<ActionEvent> getActionEventHander() {
-		return this.actionEventHanderProperty().get();
-	}
-
-	public final void setActionEventHander(final EventHandler<ActionEvent> actionEventHander) {
-		this.actionEventHanderProperty().set(actionEventHander);
 	}
 
 	public final StringProperty textProperty() {
@@ -46,19 +31,16 @@ public class HeaderView extends HBox {
 		this.textProperty().set(text);
 	}
 
-	public final BooleanProperty actionButtonVisibleProperty() {
-		return this.actionButtonVisible;
+	public final ObjectProperty<Node> actionNodeProperty() {
+		return this.actionNode;
 	}
-	
 
-	public final boolean isActionButtonVisible() {
-		return this.actionButtonVisibleProperty().get();
+	public final Node getActionNode() {
+		return this.actionNodeProperty().get();
 	}
-	
 
-	public final void setActionButtonVisible(final boolean actionButtonVisible) {
-		this.actionButtonVisibleProperty().set(actionButtonVisible);
+	public final void setActionNode(final Node actionNode) {
+		this.actionNodeProperty().set(actionNode);
 	}
-	
 
 }

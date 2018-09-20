@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import com.jfoenix.controls.JFXButton;
+import javafx.scene.layout.HBox;
 
 public class HeaderController implements Initializable {
 
@@ -16,18 +18,24 @@ public class HeaderController implements Initializable {
 	Label lblText;
 	@FXML
 	JFXButton btnAction;
+	@FXML
+	HBox actionContainer;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setBindings();
+		rootNode.actionNodeProperty().addListener((obs, oldVal, newVal) -> handleActionNodeChange(newVal));
+	}
+
+	private void handleActionNodeChange(Node newVal) {
+		actionContainer.getChildren().clear();
+		if (newVal != null)
+			actionContainer.getChildren().add(newVal);
 
 	}
 
 	private void setBindings() {
 		lblText.textProperty().bind(rootNode.textProperty());
-		btnAction.onActionProperty().bind(rootNode.actionEventHanderProperty());
-		btnAction.visibleProperty().bind(rootNode.actionButtonVisibleProperty());
-		btnAction.managedProperty().bind(btnAction.visibleProperty());
 	}
 
 }

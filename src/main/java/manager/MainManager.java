@@ -27,8 +27,9 @@ public class MainManager {
 		root.addEventHandler(ControlBarEvent.ON_ADD, evt -> controlBarManager.handleOnAdd(evt, root));
 		root.addEventHandler(ControlBarEvent.ON_OPTIONS, evt -> controlBarManager.handleOnOptions(evt, root));
 		root.addEventHandler(ControlBarEvent.ON_UPDATE, evt -> playerManager.updatePlayers());
-		root.addEventHandler(ControlBarEvent.ON_EXPORT, evt -> playerManager.handleExport());
+		root.addEventHandler(ControlBarEvent.ON_EXPORT, evt -> playerManager.handleExport(evt));
 		root.addEventHandler(FileSelectorEvent.ON_FILE_SELECTED, evt -> playerManager.handleFile(evt));
+		root.addEventHandler(FileSelectorEvent.ON_NEW_HEADER, evt -> controlBarManager.setHeaderHint(evt.getHeader()));
 		root.addEventHandler(PlayerEvent.ON_ADD, evt -> playerManager.addPlayer(evt));
 		root.addEventHandler(ControlBarEvent.ON_DRAWER_TOGGLE, evt -> handleDrawerToggle(root.getDrawer(), evt));
 	}

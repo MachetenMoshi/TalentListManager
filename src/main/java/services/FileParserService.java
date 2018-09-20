@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.hildan.fxgson.FxGson;
 import org.jsoup.Jsoup;
@@ -22,6 +23,7 @@ import com.google.gson.JsonElement;
 import drawercontent.fileselector.FileSelectorEvent;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.util.Pair;
 import objects.CombinedAttributes;
 import objects.Information;
 import objects.Player;
@@ -35,18 +37,23 @@ public class FileParserService {
 	private static final String PLACEHOLDER = "-";
 	private static final String POSITIONS = "positions";
 
-	public static List<Player> handleFile(FileSelectorEvent evt) {
+	public static Pair<String, List<Player>> handleFile(FileSelectorEvent evt) {
 		File file = evt.getFile();
+		String header = "";
+		List<Player> players = new ArrayList<>();
 		if (file != null && file.isFile() && file.getAbsolutePath().endsWith(".html")) {
 			try {
 				StringBuffer content = StringUtils.getContent(new InputStreamReader(new FileInputStream(file)));
 				Document document = Jsoup.parse(content.toString());
+				Element headerElement = document.selectFirst(HtmlUtils.ID_MAIN_HEADER);
+				if (headerElement != null)
+					header = headerElement.html();
 				Elements metaTags = document.getElementsByTag(HtmlUtils.META);
 				for (Element metaTag : metaTags)
 					if (metaTag.attr(HtmlUtils.ATTR_NAME).equalsIgnoreCase(HtmlUtils.PLAYER_JSON)) {
 						Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 						String attr = metaTag.attr(HtmlUtils.CONTENT);
-						List<Player> players = new ArrayList<>();
+
 						JsonElement jsonElement = gson.fromJson(attr, JsonElement.class);
 
 						if (jsonElement.isJsonArray()) {
@@ -57,17 +64,18 @@ public class FileParserService {
 						} else {
 							players.add(gson.fromJson(attr, Player.class));
 						}
-						return players;
 					}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
-		return new ArrayList<>();
+		return new Pair<String, List<Player>>(header, players);
 	}
 
-	public static Document generateHtmlFile(Document document, List<Player> items, boolean addSecondaryInformation) {
+	public static Document generateHtmlFile(Document document, List<Player> items, String header,
+			boolean addSecondaryInformation) {
 		Elements playerTable = document.select(HtmlUtils.ID_PLAYER_TABLE);
+		setHeader(document, header);
 		boolean allKeepers = items.stream().allMatch(p -> p.getInformation().getPositions().contains("GK"));
 		generateHeaders(new Player(), playerTable, allKeepers, addSecondaryInformation);
 		generateRows(items, playerTable, addSecondaryInformation);
@@ -79,6 +87,11 @@ public class FileParserService {
 				metaTag.attr(HtmlUtils.CONTENT, gson.toJson(items));
 			}
 		return document;
+	}
+
+	private static void setHeader(Document document, String header) {
+		Element headerElement = document.selectFirst(HtmlUtils.ID_MAIN_HEADER);
+		headerElement.html(header);
 	}
 
 	private static void generateRows(List<Player> items, Elements playerTable, boolean addSecondaryInformation) {
@@ -123,6 +136,9 @@ public class FileParserService {
 				value = PLACEHOLDER;
 			if (name.equals(POSITIONS))
 				value = translatePositions(value);
+			else {
+				value = TranslateUtils.tryTranslatingBasics(value);
+			}
 			if (addColors || isRating(name))
 				stringBuilder.append(HtmlUtils.wrapInStyledTableCell(value));
 			else
@@ -158,22 +174,25 @@ public class FileParserService {
 		List<Field> secondaryInformationFields = new ArrayList<>(
 				Arrays.asList(secondaryInformation.getClass().getDeclaredFields()));
 		for (Field info : secondaryInformationFields)
-			stringBuilder.append(HtmlUtils.wrapInTableHeader(secondaryInformationFields.indexOf(info) + priority, TranslateUtils.getReadableName(info.getName())));
+			stringBuilder.append(HtmlUtils.wrapInTableHeader(secondaryInformationFields.indexOf(info) + priority,
+					TranslateUtils.getReadableName(info.getName())));
 
 	}
 
 	private static int parseInformations(StringBuilder stringBuilder, Information information) {
 		List<Field> informationFields = new ArrayList<>(Arrays.asList(information.getClass().getDeclaredFields()));
 		for (Field info : informationFields)
-			stringBuilder.append(HtmlUtils.wrapInTableHeader(informationFields.indexOf(info), TranslateUtils.getReadableName(info.getName())));
+			stringBuilder.append(HtmlUtils.wrapInTableHeader(informationFields.indexOf(info),
+					TranslateUtils.getReadableName(info.getName())));
 		return informationFields.size();
 	}
 
-	private static int parseAttributes(int priority, boolean allKeepers, StringBuilder stringBuilder, CombinedAttributes attr) {
+	private static int parseAttributes(int priority, boolean allKeepers, StringBuilder stringBuilder,
+			CombinedAttributes attr) {
 		List<Field> informationFields = new ArrayList<>(Arrays.asList(attr.getClass().getDeclaredFields()));
 		for (Field info : informationFields)
-			stringBuilder.append(
-					HtmlUtils.wrapInTableHeader(informationFields.indexOf(info) + priority, TranslateUtils.getCombinedAttributeName(info.getName(), allKeepers)));
+			stringBuilder.append(HtmlUtils.wrapInTableHeader(informationFields.indexOf(info) + priority,
+					TranslateUtils.getCombinedAttributeName(info.getName(), allKeepers)));
 		return priority + informationFields.size();
 	}
 

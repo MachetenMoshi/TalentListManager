@@ -12,8 +12,7 @@ import javafx.scene.layout.ColumnConstraints
 dynamic component FilterView controlledby FilterController {
 	FilterView id rootNode {
 		HeaderView id headerView {
-			text : "Filter",
-			actionButtonVisible : false
+			text : "Filter"
 		},
 		GridPane {
 			vgap : 15,
