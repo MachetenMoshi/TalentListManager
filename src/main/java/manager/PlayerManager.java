@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
@@ -17,6 +18,8 @@ import drawercontent.fileselector.FileSelectorEvent;
 import input.PlayerEvent;
 import javafx.collections.ObservableList;
 import javafx.event.EventType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
 import objects.Player;
@@ -25,6 +28,7 @@ import services.SoFifaService;
 import tasks.HtmlExportTask;
 import tasks.PlayerLoadingTask;
 import tasks.PlayerUpdateTask;
+import utils.DialogBuilder;
 import utils.HtmlUtils;
 import utils.StringUtils;
 import utils.TaskManager;
@@ -40,7 +44,21 @@ public class PlayerManager {
 	}
 
 	public void handleNewPlayer(Player newVal) {
-		playerDisplayView.getItems().add(newVal);
+		Optional<Player> duplicate = playerDisplayView.getItems().stream()
+				.filter(player -> player.getInformation().getId().equals(newVal.getInformation().getId())).findFirst();
+		if (duplicate.isPresent()) {
+			Dialog<ButtonType> yesNoDialog = DialogBuilder.getInstance().buildYesNoDialog("Duplikat gefunden",
+					"Dieser Spieler befindet sich schon in der Liste. Wollen Sie den Eintrag ersetzen?",
+					playerDisplayView.getScene().getWindow());
+			Optional<ButtonType> result = yesNoDialog.showAndWait();
+			if (result.isPresent())
+				if (result.get() == ButtonType.YES) {
+					int index = playerDisplayView.getItems().indexOf(duplicate.get());
+					playerDisplayView.getItems().set(index, newVal);
+				}
+		} else
+			playerDisplayView.getItems().add(newVal);
+
 	}
 
 	public void handleExport(ControlBarEvent evt) {
@@ -98,6 +116,11 @@ public class PlayerManager {
 			handleNewPlayer(newVal);
 		});
 		taskManager.addTask(playerLoadingTask);
+	}
+
+	public void setResizeOffset(double offset) {
+		playerDisplayView.setResizeOffset(offset);
+
 	}
 
 }

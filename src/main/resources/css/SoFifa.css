@@ -5,7 +5,7 @@
      -fx-base-background-color: #4e4d4d;
      -fx-background:WHITE;
      -fx-control-inner-background:WHITE;
-     -fx-base-bright-border-color:#c8c5ce;
+     -fx-base-bright-border-color:#99CCCCCC;
 }
 
 .svg-button-small {
@@ -100,30 +100,7 @@
 
 
 
-/* .root {
-	-fx-base-color: #f1aa31;
-	-fx-base-border-color: #D7D7D7;
-	-fx-base-text-color: #333333;
-	-fx-base-bright-border-color: #F2F2F2;
-	-fx-base-bright-background:#dcdcdc;
-	-fx-base-background-color: #4e4d4d;
-	-fx-base-header-underline-color: #E4E4E4;
-	-fx-base-layer-color:white;
-	-fx-window-border-color:#797979;
-	-fx-window-border-thickness: 2.0;
-	
-	
-	-fx-status-color-done:#00cc99;
-	-fx-status-color-today:#ffff99;
-	-fx-status-color-overdue:#ff6666;
-	
-	-fx-status-color-cancel: #FF0000;
-	
-	-fx-focus-color: -fx-base-color;
-	-fx-accent: derive(-fx-base-color,50.0%);
-	-fx-faint-focus-color:transparent;
-	
-}*/
+
 
  /*******************************************************************************
  * 								Label                   		           *
@@ -651,7 +628,7 @@
 	-fx-min-width:30.0;
 }
 .jfx-hamburger-icon:hover StackPane {
-	  -fx-background-color : -fx-base-color;
+	  -fx-background-color : -fx-base-bright-border-color;
 
 	
 }

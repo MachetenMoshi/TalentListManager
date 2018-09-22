@@ -23,17 +23,21 @@
 }
 
 #playerTable td, #playerTable th {
-	padding: 8px;
+	padding: 5px;
+	vertical-align:middle;	
 	text-align: center;
 }
 
+#playerTable tr {
+	text-align: center;
 }
+
 #playerTable tr:nth-child(even) {
-	background-color: #f2f2f2;
+	background-color: #DDD;
 }
 
 #playerTable tr:hover {
-	background-color: #ddd;
+	background-color: #eee;
 }
 
 #playerTable td {
@@ -47,7 +51,7 @@
 	font-weight: bold;
 	font-family: arial;
 	color: transparent;
-	background-color: #00b8ea;  
+	background-color: #00b8ea;
 }
 
 @media print {
@@ -59,15 +63,27 @@
 
 </head>
 <body>
+	<table>
+		<thead>
+			<tr style="align: center;">
+				<td style="text-align: center;">
+					<h1 id="mainHeader"></h1>
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<div id="playerTableContainer">
+						<table data-role="table" data-mode="columntoggle"
+							class="ui-responsive tablesorter" id="playerTable">
+						</table>
 
-	<h1 id="mainHeader"></h1>
+					</div>
+				</td>
+			</tr>
+		</tbody>
 
-	<div id="playerTableContainer">
-		<table data-role="table" data-mode="columntoggle"
-			class="ui-responsive tablesorter" id="playerTable">
-		</table>
-
-	</div>
-
+	</table>
 </body>
 </html>

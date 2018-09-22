@@ -35,10 +35,13 @@ public class MainManager {
 	}
 
 	private void handleDrawerToggle(JFXedDrawer drawer, ControlBarEvent evt) {
-		if (evt.isDrawerOpened())
+		if (evt.isDrawerOpened()) {
 			drawer.open();
-		else
+			playerManager.setResizeOffset(drawer.getDefaultDrawerSize());
+		} else {
 			drawer.close();
+			playerManager.setResizeOffset(0);
+		}
 	}
 
 	private void configureMainView(MainContainerView root) {

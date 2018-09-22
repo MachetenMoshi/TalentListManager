@@ -144,12 +144,8 @@ public class DialogBuilder {
         customDialog.initModality(Modality.APPLICATION_MODAL);
         customDialog.setTitle(titleString);
         customDialog.initOwner(owner);
-        customDialog.getDialogPane().getStyleClass().add(CUSTOM_DIALOG);
         customDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
-        Button lookupButtonYes = (Button) customDialog.getDialogPane().lookupButton(ButtonType.YES);
-        lookupButtonYes.getStyleClass().add(BORDER_BUTTON);
         Button lookupButtonNo = (Button) customDialog.getDialogPane().lookupButton(ButtonType.NO);
-        lookupButtonNo.getStyleClass().add(BORDER_BUTTON);
         lookupButtonNo.setDefaultButton(true);
         Window dialogWindow = customDialog.getDialogPane().getScene().getWindow();
         dialogWindow.setOnCloseRequest(evt -> {

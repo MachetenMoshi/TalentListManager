@@ -145,13 +145,15 @@ public class SoFifaParserService {
 	}
 
 	public static Map<String, String> setTraits(Document doc, Map<String, String> map) {
-		Elements traits = doc.selectFirst("h5:containsOwn(Traits)").parent().select("li");
+		Element traitsHeader = doc.selectFirst("h5:containsOwn(Traits)");
+		Elements traits = traitsHeader != null ? traitsHeader.parent().select("li") : null;
 		StringBuilder traitsBuilder = new StringBuilder();
-		for (Element child : traits) {
-			traitsBuilder.append(child.wholeText());
-			if(traits.indexOf(child) < traits.size() -1)
-				traitsBuilder.append(", ");
-		}
+		if (traits != null)
+			for (Element child : traits) {
+				traitsBuilder.append(child.wholeText());
+				if (traits.indexOf(child) < traits.size() - 1)
+					traitsBuilder.append(", ");
+			}
 		map.put("Traits", traitsBuilder.toString());
 		return map;
 	}

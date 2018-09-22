@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
+import com.jfoenix.controls.JFXTextField;
 import com.sun.javafx.scene.control.SelectedCellsMap;
 
 import controlbar.ControlBarEvent;
@@ -16,13 +17,19 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import objects.Player;
 import utils.cellfactories.AttributeCellFactory;
+import utils.svg.SVG;
+import utils.svg.SVGLoader;
 
 public class PlayerDisplayController implements Initializable {
 	// @formatter: off
@@ -78,17 +85,41 @@ public class PlayerDisplayController implements Initializable {
 	}
 
 	private void setContextMenu() {
-		JFXButton btnDelete = new JFXButton("Löschen");
-		JFXPopup popup = new JFXPopup(btnDelete);
+		VBox contextMenu = new VBox();
+		contextMenu.setPrefWidth(175);
+		contextMenu.setPadding(new Insets(15, 5, 5, 5));
+		contextMenu.setSpacing(15);
+		JFXButton btnDelete = new JFXButton("Spieler entfernen");
+		btnDelete.setGraphic(SVGLoader.loadSVGGlyph(SVG.DELETE, SVG.SMALL));
+		btnDelete.getStyleClass().add("svg-hover-button");
+		HBox commentBox = new HBox();
+		commentBox.setAlignment(Pos.CENTER_LEFT);
+		JFXButton btnAddComment = new JFXButton();
+		btnAddComment.setGraphic(SVGLoader.loadSVGGlyph(SVG.PLUS, SVG.SMALL));
+		btnAddComment.getStyleClass().add("svg-hover-button");
+		JFXTextField tfComment = new JFXTextField();
+		tfComment.setPromptText("Kommentar");
+		tfComment.setLabelFloat(true);
+		commentBox.getChildren().addAll(tfComment, btnAddComment);
+		contextMenu.getChildren().addAll(commentBox, btnDelete);
+		JFXPopup popup = new JFXPopup(contextMenu);
+		btnAddComment.setOnAction(evt -> handleOnAddComment(evt, tfComment.getText(), popup));
 		btnDelete.setOnAction(evt -> handleOnDelete(evt, popup));
 		rootNode.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
 				if (t.getButton() == MouseButton.SECONDARY)
-					popup.show(rootNode, PopupVPosition.TOP, PopupHPosition.LEFT, t.getSceneX(), t.getSceneY() - 35);
+					popup.show(rootNode, PopupVPosition.TOP, PopupHPosition.LEFT,
+							t.getSceneX() - rootNode.getResizeOffset(), t.getSceneY() - 35);
 			}
 		});
 
+	}
+
+	private void handleOnAddComment(ActionEvent evt, String text, JFXPopup popup) {
+		if (rootNode.getSelectionModel().getSelectedItem() != null)
+			rootNode.getSelectionModel().getSelectedItem().getInformation().setComment(text);
+		popup.hide();
 	}
 
 	private void handleOnDelete(ActionEvent evt, JFXPopup popup) {

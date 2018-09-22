@@ -16,11 +16,12 @@ public class AttributeCellFactory implements Callback<TableColumn<Player, String
 				super.updateItem(value, empty);
 				if (empty) {
 					setText("");
+					setStyle("");
+
 				} else {
 					setText(value);
+					setStyle("-fx-background-color:" + AttributeUtils.getColorByAttribute(value) + ";");
 				}
-				setStyle("-fx-background-color:" + AttributeUtils.getColorByAttribute(value) + ";");
-
 			}
 		};
 	}

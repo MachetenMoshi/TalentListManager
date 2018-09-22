@@ -14,10 +14,10 @@ public class TranslateUtils {
 			new TranslationPair("name", "Name"), new TranslationPair("positions", "POS"),
 			new TranslationPair("overallRating", "GES"), new TranslationPair("potential", "POT"),
 			new TranslationPair("skillMoves", "Spezial"), new TranslationPair("weakFoot", "Schwacher Fuß"),
-			new TranslationPair("preferredFoot", "Fuß"), new TranslationPair("workRate", "Arbeitsraten"),
-			new TranslationPair("joined", "Seit"), new TranslationPair("loanedFrom", "Ausgeliehen"),
+			new TranslationPair("preferredFoot", "Fuß"), new TranslationPair("workRate", "ANG\u00A0-\u00A0DEF"),
+			new TranslationPair("joined", "Seit"), new TranslationPair("loanedFrom", "Leihe"),
 			new TranslationPair("comment", "Kommentar"), new TranslationPair("id", "ID"),
-			new TranslationPair("team", "Team"), new TranslationPair("traits", "Eigenschaften"),
+			new TranslationPair("team", "Team"), new TranslationPair("traits", "Infos"),
 			new TranslationPair("height", "Größe"), new TranslationPair("weight", "Gewicht"),
 
 			new TranslationPair("crossing", "Flanken"), new TranslationPair("finishing", "Abschluss"),
@@ -40,15 +40,17 @@ public class TranslateUtils {
 			new TranslationPair("gKReflexes", "Reflexe"));
 
 	private static List<TranslationPair> playerCombinedAttributes = Arrays.asList(
-			new TranslationPair("firstAttribute", "Schnelligkeit"), new TranslationPair("secondAttribute", "Schießen"),
-			new TranslationPair("thirdAttribute", "Passen"), new TranslationPair("fourthAttribute", "Dribbling"),
-			new TranslationPair("fifthAttribute", "Verteidigung"), new TranslationPair("sixthAttribute", "Physis"));
+			new TranslationPair("firstAttribute", "Schnell&shy;igkeit"),
+			new TranslationPair("secondAttribute", "Schießen"), new TranslationPair("thirdAttribute", "Passen"),
+			new TranslationPair("fourthAttribute", "Dribbling"), new TranslationPair("fifthAttribute", "Abwehr"),
+			new TranslationPair("sixthAttribute", "Physis"));
 
 	private static List<TranslationPair> keeperCombinedAttributes = Arrays.asList(
-			new TranslationPair("firstAttribute", "Hechten"), new TranslationPair("secondAttribute", "Fangsicherheit"),
+			new TranslationPair("firstAttribute", "Hechten"),
+			new TranslationPair("secondAttribute", "Fangsicher&shy;heit"),
 			new TranslationPair("thirdAttribute", "Abschlag"), new TranslationPair("fourthAttribute", "Reflexe"),
-			new TranslationPair("fifthAttribute", "Geschwindigkeit"),
-			new TranslationPair("sixthAttribute", "Stellungsspiel"));
+			new TranslationPair("fifthAttribute", "Geschwind&shy;igkeit"),
+			new TranslationPair("sixthAttribute", "Stellungs&shy;spiel"));
 
 	private static List<TranslationPair> positions = Arrays.asList(new TranslationPair("GK", "TW"),
 			new TranslationPair("LWB", "LAV"), new TranslationPair("LB", "LV"), new TranslationPair("CB", "IV"),
@@ -83,11 +85,25 @@ public class TranslateUtils {
 	public static String tryTranslatingBasics(String value) {
 		value = value.replaceAll("Right", "Rechts");
 		value = value.replaceAll("Left", "Links");
-		value = value.replaceAll("High", "Hoch");
-		value = value.replaceAll("Medium", "Mittel");
-		value = value.replaceAll("Low", "Niedrig");
-		value = value.replaceAll("/ ", " - ");
-		return value;
+		value = value.replaceAll("High", "H");
+		value = value.replaceAll("Medium", "M");
+		value = value.replaceAll("Low", "L");
+		value = value.replaceAll("GK Rushes Out of Goal", "Stürmt aus dem Tor");
+		value = value.replaceAll("GK Long Throw", "Weiter Abwurf");
+		value = value.replaceAll("GK Cautious With Crosses", "Vorsichtig bei Flanken");
+		value = value.replaceAll("GK Saves With Feet", "Fußabwehr");
+		value = value.replaceAll("Comes For Crosses", "Fängt Flanken ab");
+		value = value.replaceAll("Puncher", "Faustet");
 
+		value = value.replaceAll("Injury Prone", "Verletzungs&shy;anfällig");
+		value = value.replaceAll("Speed Dribbler", "Schneller Dribbler");
+		value = value.replaceAll("Corner Specialist", "Ecken&shy;spezialist");
+		value = value.replaceAll("Takes Finesse Free Kicks", "Raffinierte Freistöße");
+		value = value.replaceAll("Long Throw-in", "Weiter Einwurf");
+		value = value.replaceAll("Early Crosser", "Frühe Flanken");
+		value = value.replaceAll("Avoids Using Weaker Foot", "Meidet schwachen Fuß");
+		value = value.replaceAll("Technical Dribbler", "Technischer Dribbler");
+		value = value.replaceAll("Long Shot Taker", "Weit&shy;schüsse");
+		return value;
 	}
 }

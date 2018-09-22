@@ -34,6 +34,7 @@ import utils.TranslateUtils;
 
 public class FileParserService {
 
+	private static final String LOANED_FROM = "loanedFrom";
 	private static final String PLACEHOLDER = "-";
 	private static final String POSITIONS = "positions";
 
@@ -136,6 +137,8 @@ public class FileParserService {
 				value = PLACEHOLDER;
 			if (name.equals(POSITIONS))
 				value = translatePositions(value);
+			if (name.equals(LOANED_FROM))
+				value = value.equals(PLACEHOLDER) ? PLACEHOLDER : "Ja";
 			else {
 				value = TranslateUtils.tryTranslatingBasics(value);
 			}

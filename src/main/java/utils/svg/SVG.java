@@ -2,7 +2,7 @@ package utils.svg;
 
 public enum SVG {
 
-	EXPORT("export"), PLUS("plus"), PLAYER_ADD("player_add"), REFRESH("refresh"), REMOVE("remove"), OPTIONS(
+	DELETE("delete"),EXPORT("export"), PLUS("plus"), PLAYER_ADD("player_add"), REFRESH("refresh"), REMOVE("remove"), OPTIONS(
 			"options"), DISK("disk"), FILE("file"), STAR("star");
 
 	public static final String SMALL = "svg-button-small";
