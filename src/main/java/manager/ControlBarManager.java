@@ -8,22 +8,25 @@ import controlbar.ControlBarEvent;
 import controlbar.ControlBarView;
 import input.PlayerEvent;
 import input.PlayerInputView;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.stage.Window;
 import maincontainer.MainContainerView;
+import objects.FileInfo;
 import objects.Player;
 import options.OptionsView;
 import services.SoFifaService;
 
 public class ControlBarManager {
 	private ControlBarView controlBarView = new ControlBarView();
-	private StringProperty headerHint = new SimpleStringProperty();
+	private ObjectProperty<FileInfo> fileInfo = new SimpleObjectProperty<>(new FileInfo("", ""));
 
 	public ControlBarManager() {
-		controlBarView.headerTextProperty().bind(headerHint);
+		controlBarView.headerTextProperty().bind(fileInfo.get().contentNameProperty());
 	}
 
 	void handleOnAdd(ControlBarEvent evt, Region root) {
@@ -44,19 +47,21 @@ public class ControlBarManager {
 	}
 
 	public void handleOnOptions(ControlBarEvent evt, MainContainerView root) {
-		OptionsView optionsView = new OptionsView(headerHint.get());
+		OptionsView optionsView = new OptionsView(fileInfo.get().getContentName());
 		int width = 100;
 		optionsView.setMaxWidth(width);
 		optionsView.setMaxHeight(50);
 		JFXPopup popup = new JFXPopup(optionsView);
 		optionsView.addEventHandler(ControlBarEvent.ON_EXPORT, playerEvent -> {
 			popup.hide();
+			playerEvent.setPath(fileInfo.get().getFilePath());
 			controlBarView.fireEvent(playerEvent);
 		});
 		popup.show(root, PopupVPosition.TOP, PopupHPosition.LEFT, root.getWidth() - width / 2, 30);
 	}
 
-	public void setHeaderHint(String header) {
-		this.headerHint.set(header);
+	public void setFileInfo(FileInfo fileInfo) {
+		this.fileInfo.get().setContentName(fileInfo.getContentName());
+		this.fileInfo.get().setFilePath(fileInfo.getFilePath());
 	}
 }

@@ -34,7 +34,7 @@ public class MainContainerController implements Initializable {
 		jfxDrawer.setResizableOnDrag(false);
 		jfxDrawer.setMiniDrawerSize(-1);
 		jfxDrawer.setContent(mainContainer);
-		jfxDrawer.setDefaultDrawerSize(250);
+		jfxDrawer.setDefaultDrawerSize(180);
 		jfxDrawer.setResizeContent(true);
 		jfxDrawer.addInitDrawerCallback((param) -> false);
 		jfxDrawer.setOverLayVisible(false);

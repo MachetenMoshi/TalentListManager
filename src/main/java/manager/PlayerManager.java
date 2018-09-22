@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import controlbar.ControlBarEvent;
 import display.PlayerDisplayView;
@@ -22,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
+import objects.FileInfo;
 import objects.Player;
 import services.FileParserService;
 import services.SoFifaService;
@@ -63,6 +65,11 @@ public class PlayerManager {
 
 	public void handleExport(ControlBarEvent evt) {
 		FileChooser fileChooser = new FileChooser();
+		if (!StringUtils.isNullOrEmpty(evt.getPath())) {
+			File file = new File(evt.getPath());
+			if(file.isDirectory())
+				fileChooser.setInitialDirectory(file);
+		}
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(HtmlUtils.HTML_FILTER_NAME,
 				HtmlUtils.HTML_FILTER_VALUE);
 		fileChooser.getExtensionFilters().add(extFilter);
@@ -86,7 +93,7 @@ public class PlayerManager {
 	}
 
 	public void handleFile(FileSelectorEvent evt) {
-		Pair<String, List<Player>> players = FileParserService.handleFile(evt);
+		Pair<FileInfo, List<Player>> players = FileParserService.handleFile(evt);
 		playerDisplayView.fireEvent(new FileSelectorEvent(FileSelectorEvent.ON_NEW_HEADER, players.getKey()));
 		playerDisplayView.getItems().setAll(players.getValue());
 	}

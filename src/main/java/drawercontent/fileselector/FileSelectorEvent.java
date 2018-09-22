@@ -4,6 +4,7 @@ import java.io.File;
 
 import javafx.event.Event;
 import javafx.event.EventType;
+import objects.FileInfo;
 import objects.Player;
 
 public class FileSelectorEvent extends Event {
@@ -19,15 +20,15 @@ public class FileSelectorEvent extends Event {
 
 	private File file;
 
-	private String header;
+	private FileInfo fileInfo;
 
 	public FileSelectorEvent(EventType<? extends Event> arg0) {
 		super(arg0);
 	}
 
-	public FileSelectorEvent(EventType<? extends Event> arg0, String header) {
+	public FileSelectorEvent(EventType<? extends Event> arg0, FileInfo fileInfo) {
 		super(arg0);
-		this.header = header;
+		this.fileInfo = fileInfo;
 	}
 
 	public FileSelectorEvent(EventType<? extends Event> arg0, File file) {
@@ -39,7 +40,7 @@ public class FileSelectorEvent extends Event {
 		return file;
 	}
 
-	public String getHeader() {
-		return header;
+	public FileInfo getFileInfo() {
+		return fileInfo;
 	}
 }

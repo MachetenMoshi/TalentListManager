@@ -25,6 +25,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.util.Pair;
 import objects.CombinedAttributes;
+import objects.FileInfo;
 import objects.Information;
 import objects.Player;
 import objects.SecondaryInformation;
@@ -38,7 +39,7 @@ public class FileParserService {
 	private static final String PLACEHOLDER = "-";
 	private static final String POSITIONS = "positions";
 
-	public static Pair<String, List<Player>> handleFile(FileSelectorEvent evt) {
+	public static Pair<FileInfo, List<Player>> handleFile(FileSelectorEvent evt) {
 		File file = evt.getFile();
 		String header = "";
 		List<Player> players = new ArrayList<>();
@@ -70,7 +71,7 @@ public class FileParserService {
 				e.printStackTrace();
 			}
 		}
-		return new Pair<String, List<Player>>(header, players);
+		return new Pair<FileInfo, List<Player>>(new FileInfo(header, file.getParentFile().getAbsolutePath()), players);
 	}
 
 	public static Document generateHtmlFile(Document document, List<Player> items, String header,

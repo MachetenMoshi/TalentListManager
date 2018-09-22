@@ -17,6 +17,7 @@ public class ControlBarEvent extends Event {
 
 	private boolean drawerOpened;
 	private String exportHeader;
+	private String path;
 
 	public ControlBarEvent(EventType<? extends Event> eventType) {
 		super(eventType);
@@ -27,6 +28,7 @@ public class ControlBarEvent extends Event {
 		this.exportHeader = exportHeader;
 	}
 
+
 	public ControlBarEvent(EventType<ControlBarEvent> eventType, boolean opened) {
 		super(eventType);
 		this.drawerOpened = opened;
@@ -35,7 +37,14 @@ public class ControlBarEvent extends Event {
 	public boolean isDrawerOpened() {
 		return drawerOpened;
 	}
+
 	public String getExportHeader() {
 		return exportHeader;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public String getPath() {
+		return path;
 	}
 }
