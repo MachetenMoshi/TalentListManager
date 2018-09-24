@@ -14,7 +14,8 @@ public class ControlBarEvent extends Event {
 	public static final EventType<ControlBarEvent> ON_UPDATE = new EventType<>(ANY, "ControlBarEventUpdate");
 	public static final EventType<ControlBarEvent> ON_OPTIONS = new EventType<>(ANY, "ControlBarEventOptions");
 	public static final EventType<ControlBarEvent> ON_EXPORT = new EventType<>(ANY, "ControlBarEventExport");
-
+	public static final EventType<ControlBarEvent> ON_NEW_FILE = new EventType<>(ANY, "ControlBarEventExportOnNewFile");
+	public static final EventType<ControlBarEvent> ON_RESET = new EventType<>(ANY, "ControlBarEventOnReset");
 	private boolean drawerOpened;
 	private String exportHeader;
 	private String path;
@@ -28,7 +29,6 @@ public class ControlBarEvent extends Event {
 		this.exportHeader = exportHeader;
 	}
 
-
 	public ControlBarEvent(EventType<ControlBarEvent> eventType, boolean opened) {
 		super(eventType);
 		this.drawerOpened = opened;
@@ -41,9 +41,11 @@ public class ControlBarEvent extends Event {
 	public String getExportHeader() {
 		return exportHeader;
 	}
+
 	public void setPath(String path) {
 		this.path = path;
 	}
+
 	public String getPath() {
 		return path;
 	}

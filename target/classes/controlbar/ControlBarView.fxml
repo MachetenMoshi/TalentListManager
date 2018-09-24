@@ -25,6 +25,11 @@
 		</styleClass>
 	</Label>
 	<Region ControlBarView.hgrow="ALWAYS"/> 
+	<JFXButton fx:id="btnNew" onAction="#onNew"> 
+		<styleClass>
+			<String fx:value="svg-hover-button" />
+		</styleClass>
+	</JFXButton>
 	<JFXButton fx:id="btnRefresh" onAction="#onRefresh"> 
 		<styleClass>
 			<String fx:value="svg-hover-button" />

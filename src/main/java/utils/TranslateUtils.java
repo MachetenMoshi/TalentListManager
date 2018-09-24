@@ -14,7 +14,7 @@ public class TranslateUtils {
 			new TranslationPair("name", "Name"), new TranslationPair("positions", "POS"),
 			new TranslationPair("overallRating", "GES"), new TranslationPair("potential", "POT"),
 			new TranslationPair("skillMoves", "Spezial"), new TranslationPair("weakFoot", "Schwacher Fuﬂ"),
-			new TranslationPair("preferredFoot", "Fuﬂ"), new TranslationPair("workRate", "ANG\u00A0-\u00A0DEF"),
+			new TranslationPair("preferredFoot", "Fuﬂ"), new TranslationPair("workRate", "Arbeits&shy;rate"),
 			new TranslationPair("joined", "Seit"), new TranslationPair("loanedFrom", "Leihe"),
 			new TranslationPair("comment", "Kommentar"), new TranslationPair("id", "ID"),
 			new TranslationPair("team", "Team"), new TranslationPair("traits", "Infos"),
@@ -88,6 +88,7 @@ public class TranslateUtils {
 		value = value.replaceAll("High", "H");
 		value = value.replaceAll("Medium", "M");
 		value = value.replaceAll("Low", "L");
+		value = value.replaceAll("/ ", "/");
 		value = value.replaceAll("GK Rushes Out of Goal", "St¸rmt aus dem Tor");
 		value = value.replaceAll("GK Long Throw", "Weiter Abwurf");
 		value = value.replaceAll("GK Cautious With Crosses", "Vorsichtig bei Flanken");

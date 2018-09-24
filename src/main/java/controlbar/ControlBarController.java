@@ -30,11 +30,13 @@ public class ControlBarController implements Initializable {
 	JFXButton btnAdd;
 	@FXML
 	JFXButton btnOptions;
+	@FXML
+	Label lblHeader;
+	@FXML
+	JFXButton btnNew;
 	private JFXHamburgerHelper hamburgerHelper;
 
 	private static final String SVG_SIZE = "svg-button-medium";
-	@FXML
-	Label lblHeader;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +55,7 @@ public class ControlBarController implements Initializable {
 		btnAdd.setGraphic(SVGLoader.loadSVGGlyph(SVG.PLAYER_ADD, SVG_SIZE));
 		btnRefresh.setGraphic(SVGLoader.loadSVGGlyph(SVG.REFRESH, SVG_SIZE));
 		btnOptions.setGraphic(SVGLoader.loadSVGGlyph(SVG.OPTIONS, SVG_SIZE));
+		btnNew.setGraphic(SVGLoader.loadSVGGlyph(SVG.NEW_FILE, SVG_SIZE));
 	}
 
 	@FXML
@@ -68,6 +71,11 @@ public class ControlBarController implements Initializable {
 	@FXML
 	public void onOptions(ActionEvent event) {
 		rootNode.fireEvent(new ControlBarEvent(ControlBarEvent.ON_OPTIONS));
+	}
+
+	@FXML
+	public void onNew(ActionEvent event) {
+		rootNode.fireEvent(new ControlBarEvent(ControlBarEvent.ON_NEW_FILE));
 	}
 
 }

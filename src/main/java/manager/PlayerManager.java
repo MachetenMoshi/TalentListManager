@@ -67,7 +67,7 @@ public class PlayerManager {
 		FileChooser fileChooser = new FileChooser();
 		if (!StringUtils.isNullOrEmpty(evt.getPath())) {
 			File file = new File(evt.getPath());
-			if(file.isDirectory())
+			if (file.isDirectory())
 				fileChooser.setInitialDirectory(file);
 		}
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(HtmlUtils.HTML_FILTER_NAME,
@@ -127,7 +127,14 @@ public class PlayerManager {
 
 	public void setResizeOffset(double offset) {
 		playerDisplayView.setResizeOffset(offset);
+	}
 
+	public void reset(ControlBarEvent evt) {
+		playerDisplayView.getItems().clear();
+	}
+
+	public boolean isDataPresent() {
+		return !playerDisplayView.getItems().isEmpty();
 	}
 
 }

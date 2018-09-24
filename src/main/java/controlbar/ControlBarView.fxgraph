@@ -31,6 +31,13 @@ dynamic component ControlBarView controlledby ControlBarController styledwith "/
 		Region {
 			static hgrow : "ALWAYS"
 		},
+		JFXButton id btnNew {
+				styleClass : [
+				"svg-hover-button"
+			],
+			onAction : controllermethod onNew
+		
+		},
 		JFXButton id btnRefresh {
 			styleClass : [
 				"svg-hover-button"

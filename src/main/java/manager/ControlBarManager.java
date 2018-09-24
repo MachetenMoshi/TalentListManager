@@ -64,4 +64,9 @@ public class ControlBarManager {
 		this.fileInfo.get().setContentName(fileInfo.getContentName());
 		this.fileInfo.get().setFilePath(fileInfo.getFilePath());
 	}
+
+	public void reset(ControlBarEvent evt) {
+		this.fileInfo.get().setContentName("");
+		this.fileInfo.get().setFilePath("");
+	}
 }
