@@ -105,6 +105,17 @@ public class TranslateUtils {
 		value = value.replaceAll("Avoids Using Weaker Foot", "Meidet schwachen Fuß");
 		value = value.replaceAll("Technical Dribbler", "Technischer Dribbler");
 		value = value.replaceAll("Long Shot Taker", "Weit&shy;schüsse");
+
+		value = value.replaceAll("Tries To Beat Defensive Line", "Versucht Abwehr zu überlaufen");
+		value = value.replaceAll("Finesse Shot", "An&shy;geschnitt&shy;ener Schuss");
+		value = value.replaceAll("Playmaker", "Spielmacher");
+		value = value.replaceAll("Backs Into Player", "Abschirmen");
+		value = value.replaceAll("Diver", "Schwalben&shy;könig");
+		value = value.replaceAll("Through Ball", "Schnitt&shy;stellen&shy;pässe");
+		value = value.replaceAll("Selfish", "Egoistisch");
+		value = value.replaceAll("Injury Free", "Verletzungs&shy;frei");
+		value = value.replaceAll("Outside Foot Shot", "Außen&shy;rist&shy;schuss");
+	
 		return value;
 	}
 }
