@@ -115,7 +115,44 @@ public class TranslateUtils {
 		value = value.replaceAll("Selfish", "Egoistisch");
 		value = value.replaceAll("Injury Free", "Verletzungs&shy;frei");
 		value = value.replaceAll("Outside Foot Shot", "Außen&shy;rist&shy;schuss");
-	
+
+		value = value.replaceAll("Target Torward", "Wand&shy;spieler");
+		value = value.replaceAll("Power Header", "Power-Kopf&shy;ball");
+		value = value.replaceAll("Chip Shot", "Lupfer");
+		value = value.replaceAll("Power Free Kick", "Power-Frei&shy;stoß");
+		value = value.replaceAll("Long Passer", "Lange Pässe");
+		value = value.replaceAll("Team Player", "Team&shy;spieler");
+		value = value.replaceAll("Dives Into Tackles", "Wirft sich in Zwei&shy;kämpfe");
+		value = value.replaceAll("Leadership", "Anführer");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+		value = value.replaceAll("", "");
+
 		return value;
 	}
 }
